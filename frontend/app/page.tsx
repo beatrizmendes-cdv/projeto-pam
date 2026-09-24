@@ -1,8 +1,16 @@
-import Image from "next/image";
+import { Sidebar } from "lucide-react";
+import { Card } from "./components/Card";
+import { Header } from "./components/Header";
 
-export default function Home() {
+export default function TurbinasPage() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="min-h-screen bg-[#F8FAFC] ">
+      <Header />
+      <div className="flex">
+        <Sidebar />
+
+      </div>
+
     </main>
   );
 }
