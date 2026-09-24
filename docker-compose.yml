@@ -1,0 +1,41 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: postgres_db
+    restart: always
+    environment:
+      POSTGRES_USER: user_app
+      POSTGRES_PASSWORD: password_app
+      POSTGRES_DB: db_app
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  server:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: nest_api
+    restart: always
+    environment:
+      DATABASE_URL: "postgresql://user_app:password_app@postgres:5432/db_app?schema=public"
+      PORT: 4000
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+
+  client:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: next_app
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+
+volumes:
+  postgres_data:
