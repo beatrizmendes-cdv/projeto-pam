@@ -1,13 +1,12 @@
-import { Sidebar } from "lucide-react";
-import { Card } from "./components/Card";
+import { SiderBar } from "./components/SiderBar";
 import { Header } from "./components/Header";
 
 export default function TurbinasPage() {
   return (
-    <main className="min-h-screen bg-[#F8FAFC] ">
+    <main className="flex h-dvh flex-col overflow-hidden bg-[#F8FAFC]">
       <Header />
-      <div className="flex">
-        <Sidebar />
+      <div className="flex min-h-0 flex-1">
+        <SiderBar />
 
       </div>
 
