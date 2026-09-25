@@ -1,5 +1,5 @@
 import Image from "next/image";
-import logo from "../assets/logo.webp";
+import logo from "@/public/assets/logo.webp";
 import { Menu } from "lucide-react";
 export function Header() {
   return (
