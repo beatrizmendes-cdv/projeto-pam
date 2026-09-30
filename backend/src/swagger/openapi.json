@@ -19,9 +19,26 @@
       "post": {
         "operationId": "TurbinesController_create",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTurbineDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTurbineDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -33,7 +50,17 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseTurbineDto"
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -57,7 +84,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTurbineDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -77,9 +111,26 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTurbineDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTurbineDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -101,7 +152,22 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -113,9 +179,26 @@
       "post": {
         "operationId": "TurbineCatalogController_create",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateTurbineCatalogDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTurbineCatalogDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -127,7 +210,17 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseTurbineCatalogDto"
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -151,7 +244,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTurbineCatalogDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -171,9 +271,26 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateTurbineCatalogDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseTurbineCatalogDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -195,7 +312,22 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -207,9 +339,26 @@
       "post": {
         "operationId": "SimulationController_create",
         "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CreateSimulationDto"
+              }
+            }
+          }
+        },
         "responses": {
           "201": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSimulationDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -221,7 +370,17 @@
         "parameters": [],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ResponseSimulationDto"
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -245,7 +404,14 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSimulationDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -265,9 +431,26 @@
             }
           }
         ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UpdateSimulationDto"
+              }
+            }
+          }
+        },
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ResponseSimulationDto"
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -289,7 +472,22 @@
         ],
         "responses": {
           "200": {
-            "description": ""
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": [
+                    "message"
+                  ],
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
           }
         },
         "tags": [
@@ -320,6 +518,258 @@
   ],
   "servers": [],
   "components": {
-    "schemas": {}
+    "schemas": {
+      "PointCoordinatesDto": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "Point",
+            "enum": [
+              "Point"
+            ]
+          },
+          "coordinates": {
+            "example": [
+              -38.523,
+              -3.731
+            ],
+            "minItems": 2,
+            "maxItems": 2,
+            "description": "Array com [longitude, latitude]",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
+          }
+        },
+        "required": [
+          "type",
+          "coordinates"
+        ]
+      },
+      "CreateTurbineDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome da turbina",
+            "example": "Turbina 1"
+          },
+          "coordinates": {
+            "description": "Localização no formato GeoJSON",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PointCoordinatesDto"
+              }
+            ]
+          },
+          "simulation_id": {
+            "type": "number",
+            "description": "ID da simulacão a qual a turbina pertence",
+            "example": 1
+          },
+          "turbine_catalog_id": {
+            "type": "number",
+            "description": "ID do catálogo de turbina ao qual a turbina pertence",
+            "example": 1
+          }
+        },
+        "required": [
+          "name",
+          "coordinates",
+          "simulation_id",
+          "turbine_catalog_id"
+        ]
+      },
+      "ResponseTurbineDto": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Turbina 1"
+          },
+          "coordinates": {
+            "$ref": "#/components/schemas/PointCoordinatesDto"
+          }
+        },
+        "required": [
+          "id",
+          "name",
+          "coordinates"
+        ]
+      },
+      "UpdateTurbineDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome da turbina",
+            "example": "Turbina 1"
+          },
+          "coordinates": {
+            "description": "Localização no formato GeoJSON",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/PointCoordinatesDto"
+              }
+            ]
+          },
+          "simulation_id": {
+            "type": "number",
+            "description": "ID da simulacão a qual a turbina pertence",
+            "example": 1
+          },
+          "turbine_catalog_id": {
+            "type": "number",
+            "description": "ID do catálogo de turbina ao qual a turbina pertence",
+            "example": 1
+          }
+        }
+      },
+      "CreateTurbineCatalogDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome do modelo de turbina",
+            "example": "Turbina X"
+          },
+          "nominal_power": {
+            "type": "number",
+            "description": "Potencia do modelo de turbina",
+            "example": 1000
+          },
+          "rotor_diameter": {
+            "type": "number",
+            "description": "Diâmetro do rotor do modelo de turbina",
+            "example": 50
+          },
+          "manufacturer": {
+            "type": "string",
+            "description": "Fabricante do modelo de turbina",
+            "example": "Fabricante X"
+          }
+        },
+        "required": [
+          "name",
+          "nominal_power",
+          "rotor_diameter",
+          "manufacturer"
+        ]
+      },
+      "ResponseTurbineCatalogDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome do modelo de turbina",
+            "example": "Turbina X"
+          },
+          "nominal_power": {
+            "type": "number",
+            "description": "Potencia do modelo de turbina",
+            "example": 1000
+          },
+          "rotor_diameter": {
+            "type": "number",
+            "description": "Diâmetro do rotor do modelo de turbina",
+            "example": 50
+          },
+          "manufacturer": {
+            "type": "string",
+            "description": "Fabricante do modelo de turbina",
+            "example": "Fabricante X"
+          },
+          "id": {
+            "type": "number",
+            "example": 1
+          },
+          "created_at": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2026-09-30T12:00:00.000Z"
+          }
+        },
+        "required": [
+          "name",
+          "nominal_power",
+          "rotor_diameter",
+          "manufacturer",
+          "id",
+          "created_at"
+        ]
+      },
+      "UpdateTurbineCatalogDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome do modelo de turbina",
+            "example": "Turbina X"
+          },
+          "nominal_power": {
+            "type": "number",
+            "description": "Potencia do modelo de turbina",
+            "example": 1000
+          },
+          "rotor_diameter": {
+            "type": "number",
+            "description": "Diâmetro do rotor do modelo de turbina",
+            "example": 50
+          },
+          "manufacturer": {
+            "type": "string",
+            "description": "Fabricante do modelo de turbina",
+            "example": "Fabricante X"
+          }
+        }
+      },
+      "CreateSimulationDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome da simulacao",
+            "example": "Simulacao 1"
+          }
+        },
+        "required": [
+          "name"
+        ]
+      },
+      "ResponseSimulationDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome da simulacao",
+            "example": "Simulacao 1"
+          },
+          "id": {
+            "type": "number",
+            "example": 1
+          }
+        },
+        "required": [
+          "name",
+          "id"
+        ]
+      },
+      "UpdateSimulationDto": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Nome da simulacao",
+            "example": "Simulacao 1"
+          }
+        }
+      }
+    }
   }
 }
