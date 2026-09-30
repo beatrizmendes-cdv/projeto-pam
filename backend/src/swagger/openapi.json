@@ -1,0 +1,325 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/": {
+      "get": {
+        "operationId": "AppController_getHello",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "App"
+        ]
+      }
+    },
+    "/turbines": {
+      "post": {
+        "operationId": "TurbinesController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbine"
+        ]
+      },
+      "get": {
+        "operationId": "TurbinesController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbine"
+        ]
+      }
+    },
+    "/turbines/{id}": {
+      "get": {
+        "operationId": "TurbinesController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do catalogo",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbine"
+        ]
+      },
+      "patch": {
+        "operationId": "TurbinesController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do catalogo",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbine"
+        ]
+      },
+      "delete": {
+        "operationId": "TurbinesController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do catalogo",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbine"
+        ]
+      }
+    },
+    "/turbine-catalog": {
+      "post": {
+        "operationId": "TurbineCatalogController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbines-catalog"
+        ]
+      },
+      "get": {
+        "operationId": "TurbineCatalogController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbines-catalog"
+        ]
+      }
+    },
+    "/turbine-catalog/{id}": {
+      "get": {
+        "operationId": "TurbineCatalogController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do catalogo",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbines-catalog"
+        ]
+      },
+      "patch": {
+        "operationId": "TurbineCatalogController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do catalogo",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbines-catalog"
+        ]
+      },
+      "delete": {
+        "operationId": "TurbineCatalogController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do catalogo",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "turbines-catalog"
+        ]
+      }
+    },
+    "/simulation": {
+      "post": {
+        "operationId": "SimulationController_create",
+        "parameters": [],
+        "responses": {
+          "201": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Simulation"
+        ]
+      },
+      "get": {
+        "operationId": "SimulationController_findAll",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Simulation"
+        ]
+      }
+    },
+    "/simulation/{id}": {
+      "get": {
+        "operationId": "SimulationController_findOne",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do catalogo",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Simulation"
+        ]
+      },
+      "patch": {
+        "operationId": "SimulationController_update",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do catalogo",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Simulation"
+        ]
+      },
+      "delete": {
+        "operationId": "SimulationController_remove",
+        "parameters": [
+          {
+            "name": "id",
+            "required": true,
+            "in": "path",
+            "description": "ID do catalogo",
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "tags": [
+          "Simulation"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "PAM",
+    "description": "Documentação e testes interativos dos endpoints de Simulação, Turbinas e Catálogo",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [
+    {
+      "name": "simulation",
+      "description": "gerenciamento de simulações"
+    },
+    {
+      "name": "turbines",
+      "description": "gerenciamento de turbinas"
+    },
+    {
+      "name": "turbines-catalog",
+      "description": "gerenciamento de catalogos"
+    }
+  ],
+  "servers": [],
+  "components": {
+    "schemas": {}
+  }
+}
