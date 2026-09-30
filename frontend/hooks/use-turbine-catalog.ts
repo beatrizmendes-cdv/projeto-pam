@@ -1,5 +1,6 @@
+import { TurbinesCatalogApi } from "@/clients/projeto-pam";
 import { useQuery } from "@tanstack/react-query";
-//import {TurbinesCatalo}
-//export function useTurbineCatalog(){
-//    return useQuery<TurbineCatalog[]>
-//}
+
+export function useTurbineCatalog() {
+    //return useQuery<TurbinesCatalog[]>
+}

@@ -23,6 +23,282 @@ import type { RequestArgs } from './base';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, BaseAPI, RequiredError, operationServerMap } from './base';
 
+/**
+ * 
+ * @export
+ * @interface CreateSimulationDto
+ */
+export interface CreateSimulationDto {
+    /**
+     * Nome da simulacao
+     * @type {string}
+     * @memberof CreateSimulationDto
+     */
+    'name': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateTurbineCatalogDto
+ */
+export interface CreateTurbineCatalogDto {
+    /**
+     * Nome do modelo de turbina
+     * @type {string}
+     * @memberof CreateTurbineCatalogDto
+     */
+    'name': string;
+    /**
+     * Potencia do modelo de turbina
+     * @type {number}
+     * @memberof CreateTurbineCatalogDto
+     */
+    'nominal_power': number;
+    /**
+     * Diâmetro do rotor do modelo de turbina
+     * @type {number}
+     * @memberof CreateTurbineCatalogDto
+     */
+    'rotor_diameter': number;
+    /**
+     * Fabricante do modelo de turbina
+     * @type {string}
+     * @memberof CreateTurbineCatalogDto
+     */
+    'manufacturer': string;
+}
+/**
+ * 
+ * @export
+ * @interface CreateTurbineDto
+ */
+export interface CreateTurbineDto {
+    /**
+     * Nome da turbina
+     * @type {string}
+     * @memberof CreateTurbineDto
+     */
+    'name': string;
+    /**
+     * Localização no formato GeoJSON
+     * @type {PointCoordinatesDto}
+     * @memberof CreateTurbineDto
+     */
+    'coordinates': PointCoordinatesDto;
+    /**
+     * ID da simulacão a qual a turbina pertence
+     * @type {number}
+     * @memberof CreateTurbineDto
+     */
+    'simulation_id': number;
+    /**
+     * ID do catálogo de turbina ao qual a turbina pertence
+     * @type {number}
+     * @memberof CreateTurbineDto
+     */
+    'turbine_catalog_id': number;
+}
+/**
+ * 
+ * @export
+ * @interface PointCoordinatesDto
+ */
+export interface PointCoordinatesDto {
+    /**
+     * 
+     * @type {string}
+     * @memberof PointCoordinatesDto
+     */
+    'type': PointCoordinatesDtoTypeEnum;
+    /**
+     * Array com [longitude, latitude]
+     * @type {Array<number>}
+     * @memberof PointCoordinatesDto
+     */
+    'coordinates': Array<number>;
+}
+
+export const PointCoordinatesDtoTypeEnum = {
+    Point: 'Point'
+} as const;
+
+export type PointCoordinatesDtoTypeEnum = typeof PointCoordinatesDtoTypeEnum[keyof typeof PointCoordinatesDtoTypeEnum];
+
+/**
+ * 
+ * @export
+ * @interface ResponseSimulationDto
+ */
+export interface ResponseSimulationDto {
+    /**
+     * Nome da simulacao
+     * @type {string}
+     * @memberof ResponseSimulationDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ResponseSimulationDto
+     */
+    'id': number;
+}
+/**
+ * 
+ * @export
+ * @interface ResponseTurbineCatalogDto
+ */
+export interface ResponseTurbineCatalogDto {
+    /**
+     * Nome do modelo de turbina
+     * @type {string}
+     * @memberof ResponseTurbineCatalogDto
+     */
+    'name': string;
+    /**
+     * Potencia do modelo de turbina
+     * @type {number}
+     * @memberof ResponseTurbineCatalogDto
+     */
+    'nominal_power': number;
+    /**
+     * Diâmetro do rotor do modelo de turbina
+     * @type {number}
+     * @memberof ResponseTurbineCatalogDto
+     */
+    'rotor_diameter': number;
+    /**
+     * Fabricante do modelo de turbina
+     * @type {string}
+     * @memberof ResponseTurbineCatalogDto
+     */
+    'manufacturer': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ResponseTurbineCatalogDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResponseTurbineCatalogDto
+     */
+    'created_at': string;
+}
+/**
+ * 
+ * @export
+ * @interface ResponseTurbineDto
+ */
+export interface ResponseTurbineDto {
+    /**
+     * 
+     * @type {number}
+     * @memberof ResponseTurbineDto
+     */
+    'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResponseTurbineDto
+     */
+    'name': string;
+    /**
+     * 
+     * @type {PointCoordinatesDto}
+     * @memberof ResponseTurbineDto
+     */
+    'coordinates': PointCoordinatesDto;
+}
+/**
+ * 
+ * @export
+ * @interface TurbinesControllerRemove200Response
+ */
+export interface TurbinesControllerRemove200Response {
+    /**
+     * 
+     * @type {string}
+     * @memberof TurbinesControllerRemove200Response
+     */
+    'message': string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateSimulationDto
+ */
+export interface UpdateSimulationDto {
+    /**
+     * Nome da simulacao
+     * @type {string}
+     * @memberof UpdateSimulationDto
+     */
+    'name'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateTurbineCatalogDto
+ */
+export interface UpdateTurbineCatalogDto {
+    /**
+     * Nome do modelo de turbina
+     * @type {string}
+     * @memberof UpdateTurbineCatalogDto
+     */
+    'name'?: string;
+    /**
+     * Potencia do modelo de turbina
+     * @type {number}
+     * @memberof UpdateTurbineCatalogDto
+     */
+    'nominal_power'?: number;
+    /**
+     * Diâmetro do rotor do modelo de turbina
+     * @type {number}
+     * @memberof UpdateTurbineCatalogDto
+     */
+    'rotor_diameter'?: number;
+    /**
+     * Fabricante do modelo de turbina
+     * @type {string}
+     * @memberof UpdateTurbineCatalogDto
+     */
+    'manufacturer'?: string;
+}
+/**
+ * 
+ * @export
+ * @interface UpdateTurbineDto
+ */
+export interface UpdateTurbineDto {
+    /**
+     * Nome da turbina
+     * @type {string}
+     * @memberof UpdateTurbineDto
+     */
+    'name'?: string;
+    /**
+     * Localização no formato GeoJSON
+     * @type {PointCoordinatesDto}
+     * @memberof UpdateTurbineDto
+     */
+    'coordinates'?: PointCoordinatesDto;
+    /**
+     * ID da simulacão a qual a turbina pertence
+     * @type {number}
+     * @memberof UpdateTurbineDto
+     */
+    'simulation_id'?: number;
+    /**
+     * ID do catálogo de turbina ao qual a turbina pertence
+     * @type {number}
+     * @memberof UpdateTurbineDto
+     */
+    'turbine_catalog_id'?: number;
+}
 
 /**
  * AppApi - axios parameter creator
@@ -145,10 +421,13 @@ export const SimulationApiAxiosParamCreator = function (configuration?: Configur
     return {
         /**
          * 
+         * @param {CreateSimulationDto} createSimulationDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulationControllerCreate: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        simulationControllerCreate: async (createSimulationDto: CreateSimulationDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createSimulationDto' is not null or undefined
+            assertParamExists('simulationControllerCreate', 'createSimulationDto', createSimulationDto)
             const localVarPath = `/simulation`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -163,9 +442,12 @@ export const SimulationApiAxiosParamCreator = function (configuration?: Configur
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createSimulationDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -270,12 +552,15 @@ export const SimulationApiAxiosParamCreator = function (configuration?: Configur
         /**
          * 
          * @param {number} id ID do catalogo
+         * @param {UpdateSimulationDto} updateSimulationDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulationControllerUpdate: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        simulationControllerUpdate: async (id: number, updateSimulationDto: UpdateSimulationDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('simulationControllerUpdate', 'id', id)
+            // verify required parameter 'updateSimulationDto' is not null or undefined
+            assertParamExists('simulationControllerUpdate', 'updateSimulationDto', updateSimulationDto)
             const localVarPath = `/simulation/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -291,9 +576,12 @@ export const SimulationApiAxiosParamCreator = function (configuration?: Configur
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateSimulationDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -312,11 +600,12 @@ export const SimulationApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {CreateSimulationDto} createSimulationDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async simulationControllerCreate(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.simulationControllerCreate(options);
+        async simulationControllerCreate(createSimulationDto: CreateSimulationDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseSimulationDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.simulationControllerCreate(createSimulationDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SimulationApi.simulationControllerCreate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -326,7 +615,7 @@ export const SimulationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async simulationControllerFindAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async simulationControllerFindAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ResponseSimulationDto>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.simulationControllerFindAll(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SimulationApi.simulationControllerFindAll']?.[localVarOperationServerIndex]?.url;
@@ -338,7 +627,7 @@ export const SimulationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async simulationControllerFindOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async simulationControllerFindOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseSimulationDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.simulationControllerFindOne(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SimulationApi.simulationControllerFindOne']?.[localVarOperationServerIndex]?.url;
@@ -350,7 +639,7 @@ export const SimulationApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async simulationControllerRemove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async simulationControllerRemove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TurbinesControllerRemove200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.simulationControllerRemove(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SimulationApi.simulationControllerRemove']?.[localVarOperationServerIndex]?.url;
@@ -359,11 +648,12 @@ export const SimulationApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id ID do catalogo
+         * @param {UpdateSimulationDto} updateSimulationDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async simulationControllerUpdate(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.simulationControllerUpdate(id, options);
+        async simulationControllerUpdate(id: number, updateSimulationDto: UpdateSimulationDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseSimulationDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.simulationControllerUpdate(id, updateSimulationDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['SimulationApi.simulationControllerUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -380,18 +670,19 @@ export const SimulationApiFactory = function (configuration?: Configuration, bas
     return {
         /**
          * 
+         * @param {CreateSimulationDto} createSimulationDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulationControllerCreate(options?: any): AxiosPromise<void> {
-            return localVarFp.simulationControllerCreate(options).then((request) => request(axios, basePath));
+        simulationControllerCreate(createSimulationDto: CreateSimulationDto, options?: any): AxiosPromise<ResponseSimulationDto> {
+            return localVarFp.simulationControllerCreate(createSimulationDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulationControllerFindAll(options?: any): AxiosPromise<void> {
+        simulationControllerFindAll(options?: any): AxiosPromise<Array<ResponseSimulationDto>> {
             return localVarFp.simulationControllerFindAll(options).then((request) => request(axios, basePath));
         },
         /**
@@ -400,7 +691,7 @@ export const SimulationApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulationControllerFindOne(id: number, options?: any): AxiosPromise<void> {
+        simulationControllerFindOne(id: number, options?: any): AxiosPromise<ResponseSimulationDto> {
             return localVarFp.simulationControllerFindOne(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -409,17 +700,18 @@ export const SimulationApiFactory = function (configuration?: Configuration, bas
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulationControllerRemove(id: number, options?: any): AxiosPromise<void> {
+        simulationControllerRemove(id: number, options?: any): AxiosPromise<TurbinesControllerRemove200Response> {
             return localVarFp.simulationControllerRemove(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id ID do catalogo
+         * @param {UpdateSimulationDto} updateSimulationDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        simulationControllerUpdate(id: number, options?: any): AxiosPromise<void> {
-            return localVarFp.simulationControllerUpdate(id, options).then((request) => request(axios, basePath));
+        simulationControllerUpdate(id: number, updateSimulationDto: UpdateSimulationDto, options?: any): AxiosPromise<ResponseSimulationDto> {
+            return localVarFp.simulationControllerUpdate(id, updateSimulationDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -432,11 +724,12 @@ export const SimulationApiFactory = function (configuration?: Configuration, bas
 export interface SimulationApiInterface {
     /**
      * 
+     * @param {CreateSimulationDto} createSimulationDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SimulationApiInterface
      */
-    simulationControllerCreate(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    simulationControllerCreate(createSimulationDto: CreateSimulationDto, options?: RawAxiosRequestConfig): AxiosPromise<ResponseSimulationDto>;
 
     /**
      * 
@@ -444,16 +737,7 @@ export interface SimulationApiInterface {
      * @throws {RequiredError}
      * @memberof SimulationApiInterface
      */
-    simulationControllerFindAll(options?: RawAxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 
-     * @param {number} id ID do catalogo
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof SimulationApiInterface
-     */
-    simulationControllerFindOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    simulationControllerFindAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<ResponseSimulationDto>>;
 
     /**
      * 
@@ -462,7 +746,7 @@ export interface SimulationApiInterface {
      * @throws {RequiredError}
      * @memberof SimulationApiInterface
      */
-    simulationControllerRemove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    simulationControllerFindOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ResponseSimulationDto>;
 
     /**
      * 
@@ -471,7 +755,17 @@ export interface SimulationApiInterface {
      * @throws {RequiredError}
      * @memberof SimulationApiInterface
      */
-    simulationControllerUpdate(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    simulationControllerRemove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<TurbinesControllerRemove200Response>;
+
+    /**
+     * 
+     * @param {number} id ID do catalogo
+     * @param {UpdateSimulationDto} updateSimulationDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof SimulationApiInterface
+     */
+    simulationControllerUpdate(id: number, updateSimulationDto: UpdateSimulationDto, options?: RawAxiosRequestConfig): AxiosPromise<ResponseSimulationDto>;
 
 }
 
@@ -484,12 +778,13 @@ export interface SimulationApiInterface {
 export class SimulationApi extends BaseAPI implements SimulationApiInterface {
     /**
      * 
+     * @param {CreateSimulationDto} createSimulationDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SimulationApi
      */
-    public simulationControllerCreate(options?: RawAxiosRequestConfig) {
-        return SimulationApiFp(this.configuration).simulationControllerCreate(options).then((request) => request(this.axios, this.basePath));
+    public simulationControllerCreate(createSimulationDto: CreateSimulationDto, options?: RawAxiosRequestConfig) {
+        return SimulationApiFp(this.configuration).simulationControllerCreate(createSimulationDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -527,12 +822,13 @@ export class SimulationApi extends BaseAPI implements SimulationApiInterface {
     /**
      * 
      * @param {number} id ID do catalogo
+     * @param {UpdateSimulationDto} updateSimulationDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof SimulationApi
      */
-    public simulationControllerUpdate(id: number, options?: RawAxiosRequestConfig) {
-        return SimulationApiFp(this.configuration).simulationControllerUpdate(id, options).then((request) => request(this.axios, this.basePath));
+    public simulationControllerUpdate(id: number, updateSimulationDto: UpdateSimulationDto, options?: RawAxiosRequestConfig) {
+        return SimulationApiFp(this.configuration).simulationControllerUpdate(id, updateSimulationDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -546,10 +842,13 @@ export const TurbineApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
+         * @param {CreateTurbineDto} createTurbineDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbinesControllerCreate: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        turbinesControllerCreate: async (createTurbineDto: CreateTurbineDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createTurbineDto' is not null or undefined
+            assertParamExists('turbinesControllerCreate', 'createTurbineDto', createTurbineDto)
             const localVarPath = `/turbines`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -564,9 +863,12 @@ export const TurbineApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createTurbineDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -671,12 +973,15 @@ export const TurbineApiAxiosParamCreator = function (configuration?: Configurati
         /**
          * 
          * @param {number} id ID do catalogo
+         * @param {UpdateTurbineDto} updateTurbineDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbinesControllerUpdate: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        turbinesControllerUpdate: async (id: number, updateTurbineDto: UpdateTurbineDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('turbinesControllerUpdate', 'id', id)
+            // verify required parameter 'updateTurbineDto' is not null or undefined
+            assertParamExists('turbinesControllerUpdate', 'updateTurbineDto', updateTurbineDto)
             const localVarPath = `/turbines/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -692,9 +997,12 @@ export const TurbineApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateTurbineDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -713,11 +1021,12 @@ export const TurbineApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {CreateTurbineDto} createTurbineDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbinesControllerCreate(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.turbinesControllerCreate(options);
+        async turbinesControllerCreate(createTurbineDto: CreateTurbineDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseTurbineDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.turbinesControllerCreate(createTurbineDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbineApi.turbinesControllerCreate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -727,7 +1036,7 @@ export const TurbineApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbinesControllerFindAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async turbinesControllerFindAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ResponseTurbineDto>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.turbinesControllerFindAll(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbineApi.turbinesControllerFindAll']?.[localVarOperationServerIndex]?.url;
@@ -739,7 +1048,7 @@ export const TurbineApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbinesControllerFindOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async turbinesControllerFindOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseTurbineDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.turbinesControllerFindOne(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbineApi.turbinesControllerFindOne']?.[localVarOperationServerIndex]?.url;
@@ -751,7 +1060,7 @@ export const TurbineApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbinesControllerRemove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async turbinesControllerRemove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TurbinesControllerRemove200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.turbinesControllerRemove(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbineApi.turbinesControllerRemove']?.[localVarOperationServerIndex]?.url;
@@ -760,11 +1069,12 @@ export const TurbineApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id ID do catalogo
+         * @param {UpdateTurbineDto} updateTurbineDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbinesControllerUpdate(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.turbinesControllerUpdate(id, options);
+        async turbinesControllerUpdate(id: number, updateTurbineDto: UpdateTurbineDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseTurbineDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.turbinesControllerUpdate(id, updateTurbineDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbineApi.turbinesControllerUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -781,18 +1091,19 @@ export const TurbineApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
+         * @param {CreateTurbineDto} createTurbineDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbinesControllerCreate(options?: any): AxiosPromise<void> {
-            return localVarFp.turbinesControllerCreate(options).then((request) => request(axios, basePath));
+        turbinesControllerCreate(createTurbineDto: CreateTurbineDto, options?: any): AxiosPromise<ResponseTurbineDto> {
+            return localVarFp.turbinesControllerCreate(createTurbineDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbinesControllerFindAll(options?: any): AxiosPromise<void> {
+        turbinesControllerFindAll(options?: any): AxiosPromise<Array<ResponseTurbineDto>> {
             return localVarFp.turbinesControllerFindAll(options).then((request) => request(axios, basePath));
         },
         /**
@@ -801,7 +1112,7 @@ export const TurbineApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbinesControllerFindOne(id: number, options?: any): AxiosPromise<void> {
+        turbinesControllerFindOne(id: number, options?: any): AxiosPromise<ResponseTurbineDto> {
             return localVarFp.turbinesControllerFindOne(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -810,17 +1121,18 @@ export const TurbineApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbinesControllerRemove(id: number, options?: any): AxiosPromise<void> {
+        turbinesControllerRemove(id: number, options?: any): AxiosPromise<TurbinesControllerRemove200Response> {
             return localVarFp.turbinesControllerRemove(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id ID do catalogo
+         * @param {UpdateTurbineDto} updateTurbineDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbinesControllerUpdate(id: number, options?: any): AxiosPromise<void> {
-            return localVarFp.turbinesControllerUpdate(id, options).then((request) => request(axios, basePath));
+        turbinesControllerUpdate(id: number, updateTurbineDto: UpdateTurbineDto, options?: any): AxiosPromise<ResponseTurbineDto> {
+            return localVarFp.turbinesControllerUpdate(id, updateTurbineDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -833,11 +1145,12 @@ export const TurbineApiFactory = function (configuration?: Configuration, basePa
 export interface TurbineApiInterface {
     /**
      * 
+     * @param {CreateTurbineDto} createTurbineDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TurbineApiInterface
      */
-    turbinesControllerCreate(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    turbinesControllerCreate(createTurbineDto: CreateTurbineDto, options?: RawAxiosRequestConfig): AxiosPromise<ResponseTurbineDto>;
 
     /**
      * 
@@ -845,16 +1158,7 @@ export interface TurbineApiInterface {
      * @throws {RequiredError}
      * @memberof TurbineApiInterface
      */
-    turbinesControllerFindAll(options?: RawAxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 
-     * @param {number} id ID do catalogo
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TurbineApiInterface
-     */
-    turbinesControllerFindOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    turbinesControllerFindAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<ResponseTurbineDto>>;
 
     /**
      * 
@@ -863,7 +1167,7 @@ export interface TurbineApiInterface {
      * @throws {RequiredError}
      * @memberof TurbineApiInterface
      */
-    turbinesControllerRemove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    turbinesControllerFindOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ResponseTurbineDto>;
 
     /**
      * 
@@ -872,7 +1176,17 @@ export interface TurbineApiInterface {
      * @throws {RequiredError}
      * @memberof TurbineApiInterface
      */
-    turbinesControllerUpdate(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    turbinesControllerRemove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<TurbinesControllerRemove200Response>;
+
+    /**
+     * 
+     * @param {number} id ID do catalogo
+     * @param {UpdateTurbineDto} updateTurbineDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TurbineApiInterface
+     */
+    turbinesControllerUpdate(id: number, updateTurbineDto: UpdateTurbineDto, options?: RawAxiosRequestConfig): AxiosPromise<ResponseTurbineDto>;
 
 }
 
@@ -885,12 +1199,13 @@ export interface TurbineApiInterface {
 export class TurbineApi extends BaseAPI implements TurbineApiInterface {
     /**
      * 
+     * @param {CreateTurbineDto} createTurbineDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TurbineApi
      */
-    public turbinesControllerCreate(options?: RawAxiosRequestConfig) {
-        return TurbineApiFp(this.configuration).turbinesControllerCreate(options).then((request) => request(this.axios, this.basePath));
+    public turbinesControllerCreate(createTurbineDto: CreateTurbineDto, options?: RawAxiosRequestConfig) {
+        return TurbineApiFp(this.configuration).turbinesControllerCreate(createTurbineDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -928,12 +1243,13 @@ export class TurbineApi extends BaseAPI implements TurbineApiInterface {
     /**
      * 
      * @param {number} id ID do catalogo
+     * @param {UpdateTurbineDto} updateTurbineDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TurbineApi
      */
-    public turbinesControllerUpdate(id: number, options?: RawAxiosRequestConfig) {
-        return TurbineApiFp(this.configuration).turbinesControllerUpdate(id, options).then((request) => request(this.axios, this.basePath));
+    public turbinesControllerUpdate(id: number, updateTurbineDto: UpdateTurbineDto, options?: RawAxiosRequestConfig) {
+        return TurbineApiFp(this.configuration).turbinesControllerUpdate(id, updateTurbineDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
@@ -947,10 +1263,13 @@ export const TurbinesCatalogApiAxiosParamCreator = function (configuration?: Con
     return {
         /**
          * 
+         * @param {CreateTurbineCatalogDto} createTurbineCatalogDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbineCatalogControllerCreate: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        turbineCatalogControllerCreate: async (createTurbineCatalogDto: CreateTurbineCatalogDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createTurbineCatalogDto' is not null or undefined
+            assertParamExists('turbineCatalogControllerCreate', 'createTurbineCatalogDto', createTurbineCatalogDto)
             const localVarPath = `/turbine-catalog`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -965,9 +1284,12 @@ export const TurbinesCatalogApiAxiosParamCreator = function (configuration?: Con
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(createTurbineCatalogDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1072,12 +1394,15 @@ export const TurbinesCatalogApiAxiosParamCreator = function (configuration?: Con
         /**
          * 
          * @param {number} id ID do catalogo
+         * @param {UpdateTurbineCatalogDto} updateTurbineCatalogDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbineCatalogControllerUpdate: async (id: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        turbineCatalogControllerUpdate: async (id: number, updateTurbineCatalogDto: UpdateTurbineCatalogDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             assertParamExists('turbineCatalogControllerUpdate', 'id', id)
+            // verify required parameter 'updateTurbineCatalogDto' is not null or undefined
+            assertParamExists('turbineCatalogControllerUpdate', 'updateTurbineCatalogDto', updateTurbineCatalogDto)
             const localVarPath = `/turbine-catalog/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -1093,9 +1418,12 @@ export const TurbinesCatalogApiAxiosParamCreator = function (configuration?: Con
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateTurbineCatalogDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -1114,11 +1442,12 @@ export const TurbinesCatalogApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {CreateTurbineCatalogDto} createTurbineCatalogDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbineCatalogControllerCreate(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.turbineCatalogControllerCreate(options);
+        async turbineCatalogControllerCreate(createTurbineCatalogDto: CreateTurbineCatalogDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseTurbineCatalogDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.turbineCatalogControllerCreate(createTurbineCatalogDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbinesCatalogApi.turbineCatalogControllerCreate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1128,7 +1457,7 @@ export const TurbinesCatalogApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbineCatalogControllerFindAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async turbineCatalogControllerFindAll(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<ResponseTurbineCatalogDto>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.turbineCatalogControllerFindAll(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbinesCatalogApi.turbineCatalogControllerFindAll']?.[localVarOperationServerIndex]?.url;
@@ -1140,7 +1469,7 @@ export const TurbinesCatalogApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbineCatalogControllerFindOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async turbineCatalogControllerFindOne(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseTurbineCatalogDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.turbineCatalogControllerFindOne(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbinesCatalogApi.turbineCatalogControllerFindOne']?.[localVarOperationServerIndex]?.url;
@@ -1152,7 +1481,7 @@ export const TurbinesCatalogApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbineCatalogControllerRemove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async turbineCatalogControllerRemove(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TurbinesControllerRemove200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.turbineCatalogControllerRemove(id, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbinesCatalogApi.turbineCatalogControllerRemove']?.[localVarOperationServerIndex]?.url;
@@ -1161,11 +1490,12 @@ export const TurbinesCatalogApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} id ID do catalogo
+         * @param {UpdateTurbineCatalogDto} updateTurbineCatalogDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async turbineCatalogControllerUpdate(id: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.turbineCatalogControllerUpdate(id, options);
+        async turbineCatalogControllerUpdate(id: number, updateTurbineCatalogDto: UpdateTurbineCatalogDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ResponseTurbineCatalogDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.turbineCatalogControllerUpdate(id, updateTurbineCatalogDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TurbinesCatalogApi.turbineCatalogControllerUpdate']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -1182,18 +1512,19 @@ export const TurbinesCatalogApiFactory = function (configuration?: Configuration
     return {
         /**
          * 
+         * @param {CreateTurbineCatalogDto} createTurbineCatalogDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbineCatalogControllerCreate(options?: any): AxiosPromise<void> {
-            return localVarFp.turbineCatalogControllerCreate(options).then((request) => request(axios, basePath));
+        turbineCatalogControllerCreate(createTurbineCatalogDto: CreateTurbineCatalogDto, options?: any): AxiosPromise<ResponseTurbineCatalogDto> {
+            return localVarFp.turbineCatalogControllerCreate(createTurbineCatalogDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbineCatalogControllerFindAll(options?: any): AxiosPromise<void> {
+        turbineCatalogControllerFindAll(options?: any): AxiosPromise<Array<ResponseTurbineCatalogDto>> {
             return localVarFp.turbineCatalogControllerFindAll(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1202,7 +1533,7 @@ export const TurbinesCatalogApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbineCatalogControllerFindOne(id: number, options?: any): AxiosPromise<void> {
+        turbineCatalogControllerFindOne(id: number, options?: any): AxiosPromise<ResponseTurbineCatalogDto> {
             return localVarFp.turbineCatalogControllerFindOne(id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1211,17 +1542,18 @@ export const TurbinesCatalogApiFactory = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbineCatalogControllerRemove(id: number, options?: any): AxiosPromise<void> {
+        turbineCatalogControllerRemove(id: number, options?: any): AxiosPromise<TurbinesControllerRemove200Response> {
             return localVarFp.turbineCatalogControllerRemove(id, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {number} id ID do catalogo
+         * @param {UpdateTurbineCatalogDto} updateTurbineCatalogDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        turbineCatalogControllerUpdate(id: number, options?: any): AxiosPromise<void> {
-            return localVarFp.turbineCatalogControllerUpdate(id, options).then((request) => request(axios, basePath));
+        turbineCatalogControllerUpdate(id: number, updateTurbineCatalogDto: UpdateTurbineCatalogDto, options?: any): AxiosPromise<ResponseTurbineCatalogDto> {
+            return localVarFp.turbineCatalogControllerUpdate(id, updateTurbineCatalogDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1234,11 +1566,12 @@ export const TurbinesCatalogApiFactory = function (configuration?: Configuration
 export interface TurbinesCatalogApiInterface {
     /**
      * 
+     * @param {CreateTurbineCatalogDto} createTurbineCatalogDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TurbinesCatalogApiInterface
      */
-    turbineCatalogControllerCreate(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    turbineCatalogControllerCreate(createTurbineCatalogDto: CreateTurbineCatalogDto, options?: RawAxiosRequestConfig): AxiosPromise<ResponseTurbineCatalogDto>;
 
     /**
      * 
@@ -1246,16 +1579,7 @@ export interface TurbinesCatalogApiInterface {
      * @throws {RequiredError}
      * @memberof TurbinesCatalogApiInterface
      */
-    turbineCatalogControllerFindAll(options?: RawAxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 
-     * @param {number} id ID do catalogo
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TurbinesCatalogApiInterface
-     */
-    turbineCatalogControllerFindOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    turbineCatalogControllerFindAll(options?: RawAxiosRequestConfig): AxiosPromise<Array<ResponseTurbineCatalogDto>>;
 
     /**
      * 
@@ -1264,7 +1588,7 @@ export interface TurbinesCatalogApiInterface {
      * @throws {RequiredError}
      * @memberof TurbinesCatalogApiInterface
      */
-    turbineCatalogControllerRemove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    turbineCatalogControllerFindOne(id: number, options?: RawAxiosRequestConfig): AxiosPromise<ResponseTurbineCatalogDto>;
 
     /**
      * 
@@ -1273,7 +1597,17 @@ export interface TurbinesCatalogApiInterface {
      * @throws {RequiredError}
      * @memberof TurbinesCatalogApiInterface
      */
-    turbineCatalogControllerUpdate(id: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    turbineCatalogControllerRemove(id: number, options?: RawAxiosRequestConfig): AxiosPromise<TurbinesControllerRemove200Response>;
+
+    /**
+     * 
+     * @param {number} id ID do catalogo
+     * @param {UpdateTurbineCatalogDto} updateTurbineCatalogDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof TurbinesCatalogApiInterface
+     */
+    turbineCatalogControllerUpdate(id: number, updateTurbineCatalogDto: UpdateTurbineCatalogDto, options?: RawAxiosRequestConfig): AxiosPromise<ResponseTurbineCatalogDto>;
 
 }
 
@@ -1286,12 +1620,13 @@ export interface TurbinesCatalogApiInterface {
 export class TurbinesCatalogApi extends BaseAPI implements TurbinesCatalogApiInterface {
     /**
      * 
+     * @param {CreateTurbineCatalogDto} createTurbineCatalogDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TurbinesCatalogApi
      */
-    public turbineCatalogControllerCreate(options?: RawAxiosRequestConfig) {
-        return TurbinesCatalogApiFp(this.configuration).turbineCatalogControllerCreate(options).then((request) => request(this.axios, this.basePath));
+    public turbineCatalogControllerCreate(createTurbineCatalogDto: CreateTurbineCatalogDto, options?: RawAxiosRequestConfig) {
+        return TurbinesCatalogApiFp(this.configuration).turbineCatalogControllerCreate(createTurbineCatalogDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -1329,12 +1664,13 @@ export class TurbinesCatalogApi extends BaseAPI implements TurbinesCatalogApiInt
     /**
      * 
      * @param {number} id ID do catalogo
+     * @param {UpdateTurbineCatalogDto} updateTurbineCatalogDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TurbinesCatalogApi
      */
-    public turbineCatalogControllerUpdate(id: number, options?: RawAxiosRequestConfig) {
-        return TurbinesCatalogApiFp(this.configuration).turbineCatalogControllerUpdate(id, options).then((request) => request(this.axios, this.basePath));
+    public turbineCatalogControllerUpdate(id: number, updateTurbineCatalogDto: UpdateTurbineCatalogDto, options?: RawAxiosRequestConfig) {
+        return TurbinesCatalogApiFp(this.configuration).turbineCatalogControllerUpdate(id, updateTurbineCatalogDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
