@@ -1,4 +1,4 @@
-import { PartialType } from '@nestjs/mapped-types';
+import { PartialType } from '@nestjs/swagger';
 import { CreateSimulationDto } from './create-simulation.dto.js';
 
 export class UpdateSimulationDto extends PartialType(CreateSimulationDto) {}

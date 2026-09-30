@@ -35,5 +35,3 @@ generateOpenApiJson().catch((err) => {
     console.error("Erro ao gerar o arquivo:", err);
     process.exit(1);
 });
-
-generateOpenApiJson();

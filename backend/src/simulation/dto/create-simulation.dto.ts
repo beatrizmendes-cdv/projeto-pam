@@ -1,9 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Transform } from "class-transformer/types/decorators/index.js";
 import { IsNotEmpty, IsString } from "class-validator";
 
 export class CreateSimulationDto {
     @ApiProperty({
+        type: String,
         description: "Nome da simulacao",
         example: "Simulacao 1"
     })

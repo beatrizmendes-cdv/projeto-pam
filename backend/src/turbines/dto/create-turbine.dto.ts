@@ -3,12 +3,15 @@ import { ArrayMaxSize, ArrayMinSize, Equals, IsArray, IsDefined, IsNotEmpty, IsN
 import { Type } from "class-transformer";
 
 export class PointCoordinatesDto {
-    @ApiProperty({ example: 'Point', enum: ['Point'] })
+    @ApiProperty({ type: String, example: 'Point', enum: ['Point'] })
     @Equals('Point', { message: 'O tipo da coordenada deve ser "Point"' })
     type: 'Point';
 
     @ApiProperty({
+        type: [Number],
         example: [-38.523, -3.731],
+        minItems: 2,
+        maxItems: 2,
         description: 'Array com [longitude, latitude]',
     })
     @IsArray({ message: 'Coordinates deve ser um array com longitude e latitude' })
@@ -20,6 +23,7 @@ export class PointCoordinatesDto {
 
 export class CreateTurbineDto {
     @ApiProperty({
+        type: String, 
         description: "Nome da turbina",
         example: "Turbina 1"
     })
@@ -28,16 +32,17 @@ export class CreateTurbineDto {
     name: string;
 
     @ApiProperty({
-        type: PointCoordinatesDto,
-        description: 'Localização geográfica da turbina no formato GeoJSON',
+        type: () => PointCoordinatesDto,
+        description: 'Localização no formato GeoJSON',
     })
-    @IsDefined({ message: 'As coordenadas são obrigatórias' })
-    @IsObject({ message: 'As coordenadas devem ser um objeto válido' })
+    @IsDefined()
+    @IsObject()
     @ValidateNested()
     @Type(() => PointCoordinatesDto)
     coordinates: PointCoordinatesDto;
 
     @ApiProperty({
+        type:Number,
         description: "ID da simulacão a qual a turbina pertence",
         example: 1
     })
@@ -45,6 +50,7 @@ export class CreateTurbineDto {
     simulation_id: number;
 
     @ApiProperty({
+        type:Number,
         description: "ID do catálogo de turbina ao qual a turbina pertence",
         example: 1
     })

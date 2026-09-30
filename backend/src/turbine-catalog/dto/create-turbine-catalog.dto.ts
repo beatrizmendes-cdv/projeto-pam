@@ -3,6 +3,7 @@ import { IsNotEmpty, IsNumber, IsString } from "class-validator";
 
 export class CreateTurbineCatalogDto {
     @ApiProperty({
+        type: String,
         description: "Nome do modelo de turbina",
         example: "Turbina X"
     })
@@ -11,6 +12,7 @@ export class CreateTurbineCatalogDto {
     name: string;
 
     @ApiProperty({
+        type:Number,
         description: "Potencia do modelo de turbina",
         example: 1000
     })
@@ -19,6 +21,7 @@ export class CreateTurbineCatalogDto {
     nominal_power: number;
 
     @ApiProperty({
+        type:Number,
         description: "Diâmetro do rotor do modelo de turbina",
         example: 50
     })
@@ -27,6 +30,7 @@ export class CreateTurbineCatalogDto {
     rotor_diameter: number;
 
     @ApiProperty({
+        type:String,
         description: "Fabricante do modelo de turbina",
         example: "Fabricante X"
     })

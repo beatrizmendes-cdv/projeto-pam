@@ -22,26 +22,6 @@ java -jar "$JAR_PATH" generate \
   -o "$OUTPUT_CLIENT_DIR" \
   --additional-properties=npmName="@projeto-pam/api",supportsES6=true,withInterfaces=true
 
-COMMON_TS="${OUTPUT_CLIENT_DIR}/common.ts"
-if [ -f "$COMMON_TS" ]; then
-  echo "Aplicando correcao no common.ts"
-  
-  sed -i.bak 's/Required<RequestArgs>/any/g' "$COMMON_TS"
-  
-  node -e '
-    const fs = require("fs");
-    const file = process.argv[1];
-    let content = fs.readFileSync(file, "utf8");
-    content = content.replace(
-      /export const createRequestFunction = function \((.*?)\) \{/g,
-      "export const createRequestFunction = function ($1): any {"
-    );
-    fs.writeFileSync(file, content);
-  ' "$COMMON_TS"
-
-  rm -f "${COMMON_TS}.bak"
-fi
-
 echo "Instalando dependencias e compilando"
 cd "$OUTPUT_CLIENT_DIR"
 npm install --ignore-scripts
