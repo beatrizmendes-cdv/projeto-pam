@@ -4,9 +4,12 @@ services:
     container_name: postgres_db
     restart: always
     environment:
-      POSTGRES_USER: user_app
-      POSTGRES_PASSWORD: password_app
-      POSTGRES_DB: db_app
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_USERNAME: user_app
+      DB_PASSWORD: password_app
+      DB_DATABASE: db_app
+      PORT: "4000"
     ports:
       - "5433:5432"
     volumes:
