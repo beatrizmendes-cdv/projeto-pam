@@ -595,12 +595,22 @@
           },
           "coordinates": {
             "$ref": "#/components/schemas/PointCoordinatesDto"
+          },
+          "turbine_catalog_id": {
+            "type": "number",
+            "example": 1
+          },
+          "simulation_id": {
+            "type": "number",
+            "example": 1
           }
         },
         "required": [
           "id",
           "name",
-          "coordinates"
+          "coordinates",
+          "turbine_catalog_id",
+          "simulation_id"
         ]
       },
       "UpdateTurbineDto": {

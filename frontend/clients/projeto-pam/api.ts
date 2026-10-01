@@ -210,6 +210,18 @@ export interface ResponseTurbineDto {
      * @memberof ResponseTurbineDto
      */
     'coordinates': PointCoordinatesDto;
+    /**
+     * 
+     * @type {number}
+     * @memberof ResponseTurbineDto
+     */
+    'turbine_catalog_id': number;
+    /**
+     * 
+     * @type {number}
+     * @memberof ResponseTurbineDto
+     */
+    'simulation_id': number;
 }
 /**
  * 

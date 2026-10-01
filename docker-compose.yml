@@ -4,12 +4,9 @@ services:
     container_name: postgres_db
     restart: always
     environment:
-      DB_HOST: postgres
-      DB_PORT: "5432"
-      DB_USERNAME: user_app
-      DB_PASSWORD: password_app
-      DB_DATABASE: db_app
-      PORT: "4000"
+      POSTGRES_USER: user_app
+      POSTGRES_PASSWORD: password_app
+      POSTGRES_DB: db_app
     ports:
       - "5433:5432"
     volumes:
@@ -22,8 +19,12 @@ services:
     container_name: nest_api
     restart: always
     environment:
-      DATABASE_URL: "postgresql://user_app:password_app@postgres:5432/db_app?schema=public"
-      PORT: 4000
+      DB_HOST: postgres
+      DB_PORT: "5432"
+      DB_USERNAME: user_app
+      DB_PASSWORD: password_app
+      DB_DATABASE: db_app
+      PORT: "4000"
     ports:
       - "4000:4000"
     depends_on:

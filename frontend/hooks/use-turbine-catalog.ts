@@ -1,6 +1,5 @@
 "use client";
 import { ResponseTurbineCatalogDto } from "@/clients/projeto-pam";
-import { TurbinesCatalogApi } from "@/clients/projeto-pam";
 import { turbineCatalogApi } from "@/lib/api";
 import { useQuery } from "@tanstack/react-query";
 
@@ -12,5 +11,5 @@ export function useTurbineCatalog() {
             return response.data
         }
     })
-
 }
+

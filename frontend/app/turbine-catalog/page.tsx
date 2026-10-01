@@ -42,7 +42,7 @@ export default function TurbineCatalogPage() {
             <div className="mt-5 border border-gray-200 p-3 bg-white rounded-xl">
                 <div className="w-full max-w-md">
                     <Controller name="search" control={control} render={({ field: { ref, ...field } }) => (
-                        <TextField {...field} inputRef={ref} label="Digite o modelo que voce quer buscar no catalogo..." placeholder="Nome ou fabricante" size="small" fullWidth />
+                        <TextField {...field} inputRef={ref} label="Procurar no catálogo de turbinas..." placeholder="Nome ou fabricante" size="small" fullWidth />
                     )} />
                 </div>
             </div>
@@ -58,39 +58,39 @@ export default function TurbineCatalogPage() {
                         Não Foi possivel carregar o catálogo.
                     </Alert>
                 ) : (
-                    <div className="overflow-hidden bg-white rounded-xl border border-gray-200">
+                    <div className="overflow-hidden bg-white rounded-xl border border-gray-200 mt-5">
                         <TableContainer>
                             <Table aria-label="Catálogo de turbinas"
-                                className="min-w-[700px]"
+                                className="min-w-175"
                             >
                                 <TableHead>
                                     <TableRow className="bg-slate-50">
                                         <TableCell>
-                                            <span className="text-xs font-semibold uppercase text-slate-500">
+                                            <span className="text-xs font-semibold font-sans uppercase text-gray-400">
                                                 Nome da turbina
                                             </span>
                                         </TableCell>
 
                                         <TableCell>
-                                            <span className="text-xs font-semibold uppercase text-slate-500">
+                                            <span className="text-xs font-semibold font-sans uppercase text-gray-400">
                                                 Data de criação
                                             </span>
                                         </TableCell>
 
-                                        <TableCell align="right">
-                                            <span className="text-xs font-semibold uppercase text-slate-500">
+                                        <TableCell >
+                                            <span className="text-xs font-semibold font-sans uppercase text-gray-400">
                                                 Potência
                                             </span>
                                         </TableCell>
 
-                                        <TableCell align="right">
-                                            <span className="text-xs font-semibold uppercase text-slate-500">
+                                        <TableCell >
+                                            <span className="text-xs font-semibold font-sans uppercase text-gray-400">
                                                 Diâmetro
                                             </span>
                                         </TableCell>
 
                                         <TableCell>
-                                            <span className="text-xs font-semibold uppercase text-slate-500">
+                                            <span className="text-xs font-semibold font-sans uppercase text-gray-400">
                                                 Fabricante
                                             </span>
                                         </TableCell>
@@ -112,31 +112,31 @@ export default function TurbineCatalogPage() {
                                         filteredCatalog.map((model) => (
                                             <TableRow key={model.id} hover>
                                                 <TableCell>
-                                                    <span className="font-semibold text-[#044947]">
+                                                    <span className="font-semibold font-sans text-[#044947]">
                                                         {model.name}
                                                     </span>
                                                 </TableCell>
 
                                                 <TableCell>
-                                                    <span className="font-mono text-xs text-slate-500">
+                                                    <span className="font-mono text-xs text-gray-600">
                                                         {model.created_at.slice(0, 10)}
                                                     </span>
                                                 </TableCell>
 
-                                                <TableCell align="right">
-                                                    <span className="font-semibold text-[#044947]">
-                                                        {model.nominal_power}
+                                                <TableCell >
+                                                    <span className="font-semibold font-sans text-[#044947] ">
+                                                        {model.nominal_power} MW
                                                     </span>
                                                 </TableCell>
 
-                                                <TableCell align="right">
-                                                    <span className="font-semibold text-[#044947]">
-                                                        {model.rotor_diameter}
+                                                <TableCell >
+                                                    <span className="font-semibold font-sans text-[#044947]">
+                                                        {model.rotor_diameter} M
                                                     </span>
                                                 </TableCell>
 
                                                 <TableCell>
-                                                    <span className="font-semibold text-[#044947]">
+                                                    <span className="font-semibold font-sans text-[#044947]">
                                                         {model.manufacturer}
                                                     </span>
                                                 </TableCell>
