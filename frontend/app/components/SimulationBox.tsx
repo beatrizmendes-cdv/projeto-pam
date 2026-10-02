@@ -3,6 +3,7 @@ type BoxProps = {
     name: string;
     date: string;
     total: number;
+    onClick?: () => void;
 
 }
 export default function SimulationBox({ name, date, total }: BoxProps) {

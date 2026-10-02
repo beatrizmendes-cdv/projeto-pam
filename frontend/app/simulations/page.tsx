@@ -6,6 +6,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import TextField from "@mui/material/TextField";
 import SimulationBox from "../components/SimulationBox";
 import Button from "@mui/material/Button";
+import Alert from "@mui/material/Alert";
 
 type SeachForm = {
     search: string;
@@ -40,9 +41,44 @@ export default function Simulation() {
                 </div>
             </div>
             <SimulationBox name="Simulação 1" date="01-01-2023" total={15} />
-
-
-
+  {isPending ? (
+        <div
+          role="status"
+          className="flex items-center gap-3 p-6 text-[#64748B]"
+        >
+          <CircularProgress size={24} />
+          <p>Carregando simulações...</p>
         </div>
-    );
+      ) : isError ? (
+        <div className="mt-4">
+          <Alert
+            severity="error"
+            action={
+              <Button color="inherit" onClick={() => refetch()}>
+                Tentar novamente
+              </Button>
+            }
+          >
+            Não foi possível carregar as simulações.
+          </Alert>
+        </div>
+      ) : filteredSimulation.length === 0 ? (
+        <p className="mt-6 text-[#64748B]">
+          {simulation.length === 0
+            ? "Nenhuma simulação cadastrada."
+            : "Nenhuma simulação encontrada para essa busca."}
+        </p>
+      ) : (
+        <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {filteredSimulation.map((item) => (
+            <SimulationBox
+              name={item.name}
+              total={15}
+              date="12-9-26"
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }
