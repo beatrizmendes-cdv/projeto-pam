@@ -5,7 +5,7 @@ import { JetBrains_Mono, Outfit } from "next/font/google";
 import { SiderBar } from "./components/SiderBar";
 import { Header } from "./components/Header";
 import { ReactQueryProvider } from "./components/providers/react-query-provider";
-
+import { MuiProvider } from "./components/providers/mui-provider";
 
 const outfit = Outfit({
   variable: "--font-outfit",
@@ -36,7 +36,8 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
   return (
     <html lang="pt-BR" className={`${outfit.variable} ${jetbrainsMono.variable} ${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
       <body className="flex h-screen flex-col overflow-hidden bg-[#F8FAFC]">
-        <Header />
+        <MuiProvider>
+          <Header />
         <div className="flex flex-1 overflow-hidden">
           <SiderBar />
           <main className="flex-1 overflow-y-auto p-8">
@@ -46,6 +47,7 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
             </ReactQueryProvider>
           </main>
         </div>
+        </MuiProvider>
       </body>
     </html>
   );
