@@ -14,13 +14,24 @@ import TableRow from "@mui/material/TableRow";
 import TableCell from "@mui/material/TableCell";
 import TableBody from "@mui/material/TableBody";
 import { useTurbineCatalog, } from "@/hooks/use-turbine-catalog";
+import { formatTurbinePayload } from "../forms/turbines/format-payload";
+import { TurbineFormValues } from "../forms/turbines/schema";
+import { useState } from "react";
+import Box from "@mui/material/Box";
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import IconButton from "@mui/material/IconButton";
+import DialogContent from "@mui/material/DialogContent";
+import CreateEditTurbineForm from "../forms/turbines/create-edit-turbine-form";
+import CloseIcon from "@mui/icons-material/Close";
 
 type SearchForm = {
     search: string;
 }
 
 export default function ClientTurbines() {
-    const { data: turbines = [], isPending, isError, refetch } = useTurbine();
+    const { data: turbines = [], isPending, isError, refetch, createTurbine, isCreating } = useTurbine();
+    const [isModalOpen, setIsModalOpen] = useState(false);
     const { control } = useForm<SearchForm>({ defaultValues: { search: "" } });
     const search = useWatch({ control, name: "search" })
     const term = search.trim().toLocaleLowerCase("pt-BR")
@@ -30,45 +41,55 @@ export default function ClientTurbines() {
         return name.includes(term);
     }));
 
-    for (let i = 0; i < turbines.length; i++) {
-        console.log(turbines[i])
-    }
+    // for (let i = 0; i < turbines.length; i++) {
+    //     console.log(turbines[i])
+    // }
+
+    const handleCreateSubmit = async (values: TurbineFormValues) => {
+        try {
+            const payload = formatTurbinePayload(values)
+            await createTurbine(payload)
+            setIsModalOpen(false);
+        } catch (error) {
+            console.error("Erro ao criar a turbina:", error);
+        }
+    };
 
 
     return (
-        <div>
+        <Box>
             <h1 className="text-2xl font-bold text-[#044947]">Turbinas</h1>
             <p className="text-[#64748B] font-light pb-4 pt-1">
                 Cadastre e gerencie todas turbinas.
             </p>
-            <div className="pt-2 w-82">
+            <Box className="pt-2 w-82">
                 <Card label="Total:" unit="turbinas" value={isPending || isError ? "-" : turbines.length} />
-            </div>
-            <div className="mt-5 border border-gray-200 p-3 bg-white rounded-xl">
-                <div className="flex justify-between">
-                    <div className="w-full max-w-md">
+            </Box>
+            <Box className="mt-5 border border-gray-200 p-3 bg-white rounded-xl">
+                <Box className="flex justify-between">
+                    <Box className="w-full max-w-md">
                         <Controller name="search" control={control} render={({ field: { ref, ...field } }) => (
                             <TextField {...field} inputRef={ref} color="success" label="Procurar turbina..." placeholder="Nome da turbina" size="small" fullWidth />
                         )} />
-                    </div>
-                    <Button variant="contained">+ Adicionar Turbinas</Button>
+                    </Box>
+                    <Button variant="contained" onClick={() => setIsModalOpen(true)}>+ Adicionar Turbinas</Button>
 
-                </div>
+                </Box>
 
 
-            </div>
-            <div>
+            </Box>
+            <Box>
                 {isPending ? (
-                    <div role="status" className="flex items-center gap-3 p6 ">
+                    <Box role="status" className="flex items-center gap-3 p6 ">
                         <CircularProgress size={24} />
                         <p>Carregando turbinas...</p>
-                    </div>
+                    </Box>
                 ) : isError ? (
-                    <Alert severity="error" action={<Button color="inherit" onClick={() => refetch}> Tentar novamente</Button>}>
+                    <Alert severity="error" action={<Button color="inherit" onClick={() => refetch()}> Tentar novamente</Button>}>
                         Não Foi possivel carregar as turbinas.
                     </Alert>
                 ) : (
-                    <div className=" overflow-hidden bg-white rounded-xl border border-gray-200 mt-5">
+                    <Box className=" overflow-hidden bg-white rounded-xl border border-gray-200 mt-5">
                         <TableContainer>
                             <Table aria-label="Turbinas" className="min-w-175">
                                 <TableHead>
@@ -142,9 +163,22 @@ export default function ClientTurbines() {
                                 </TableBody>
                             </Table>
                         </TableContainer>
-                    </div>
+                    </Box>
                 )}
-            </div>
-        </div>
+            </Box>
+            <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} maxWidth="sm" fullWidth slotProps={{ paper: { className: "rounded-3xl p-2" } }}>
+                <DialogTitle className="flex justify-between font-sans items-center text-[#044947] font-bold text-lg">
+                    Cadastre uma nova turbina
+                    <IconButton onClick={() => setIsModalOpen(false)} size="small">
+                        <CloseIcon />
+                    </IconButton>
+                </DialogTitle>
+                <DialogContent>
+                    <Box className="pt-2">
+                        <CreateEditTurbineForm onSubmit={handleCreateSubmit} isLoading={isCreating} />
+                    </Box>
+                </DialogContent>
+            </Dialog>
+        </Box>
     );
 }

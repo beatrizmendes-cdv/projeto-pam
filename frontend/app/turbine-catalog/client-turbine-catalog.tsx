@@ -175,7 +175,7 @@ export default function ClientTurbineCatalog() {
                 )}
             </Box>
             <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} maxWidth="sm" fullWidth slotProps={{ paper: { className: "rounded-2xl p-2" } }}>
-                <DialogTitle className="flex justify-between items-center text-[#044947] font-bold text-lg">
+                <DialogTitle className="flex justify-between font-sans items-center text-[#044947] font-bold text-lg">
                     Cadastre um novo modelo de turbina
                     <IconButton onClick={() => setIsModalOpen(false)} size="small">
                         <CloseIcon />

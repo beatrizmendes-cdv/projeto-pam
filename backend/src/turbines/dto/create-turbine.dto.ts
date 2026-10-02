@@ -1,5 +1,5 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { ArrayMaxSize, ArrayMinSize, Equals, IsArray, IsDefined, IsNotEmpty, IsNumber, IsObject, IsString, ValidateNested } from "class-validator";
+import { ArrayMaxSize, ArrayMinSize, Equals, IsArray, IsDefined, IsNotEmpty, IsNumber, IsObject, IsOptional, IsString, ValidateNested } from "class-validator";
 import { Type } from "class-transformer";
 
 export class PointCoordinatesDto {
@@ -23,7 +23,7 @@ export class PointCoordinatesDto {
 
 export class CreateTurbineDto {
     @ApiProperty({
-        type: String, 
+        type: String,
         description: "Nome da turbina",
         example: "Turbina 1"
     })
@@ -42,19 +42,21 @@ export class CreateTurbineDto {
     coordinates: PointCoordinatesDto;
 
     @ApiProperty({
-        type:Number,
+        type: Number,
         description: "ID da simulacão a qual a turbina pertence",
         example: 1
     })
+    @IsOptional()
     @IsNumber({}, { message: "O ID da simulação deve ser um número." })
     simulation_id: number;
 
     @ApiProperty({
-        type:Number,
+        type: Number,
         description: "ID do catálogo de turbina ao qual a turbina pertence",
         example: 1
     })
+
     @IsNumber({}, { message: "O ID do catálogo de turbina deve ser um número." })
     @IsNotEmpty({ message: "O ID do catálogo de turbina não pode ser vazio." })
-    turbine_catalog_id: number;
+    turbine_catalog_id?: number;
 }
