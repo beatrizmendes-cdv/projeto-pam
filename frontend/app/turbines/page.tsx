@@ -127,7 +127,7 @@ export default function TurbinesPage() {
 
                                                 <TableCell >
                                                     <span className="font-semibold font-sans text-[#044947]">
-                                                        {catalog.find((item) => item.id === turbine.turbine_catalog_id)?.name || "Não encontrado"} M
+                                                        {catalog.find((item) => item.id === turbine.turbine_catalog_id)?.name || "Não encontrado"}
                                                     </span>
                                                 </TableCell>
                                             </TableRow>

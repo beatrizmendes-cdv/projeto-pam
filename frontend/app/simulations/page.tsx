@@ -1,8 +1,11 @@
 "use client";
 import { useSimulation } from "@/hooks/use-simulation";
-import { useForm, useWatch } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form";
 import { Card } from "../components/Card";
 import CircularProgress from "@mui/material/CircularProgress";
+import TextField from "@mui/material/TextField";
+import SimulationBox from "../components/SimulationBox";
+import Button from "@mui/material/Button";
 
 type SeachForm = {
     search: string;
@@ -26,6 +29,18 @@ export default function Simulation() {
             <div className="pt-2 w-82">
                 <Card label="Total:" unit="simulações" value={isPending || isError ? "-" : simulation.length} />
             </div>
+            <div className="mt-5 border border-gray-200 p-3 rounded-xl bg-white">
+                <div className="flex justify-between ">
+                    <div className="w-full max-w-md ">
+                        <Controller name="search" control={control} render={({ field: { ref, ...field } }) => (
+                            <TextField {...field} inputRef={ref} label="Procurar simulação..." placeholder="Nome da simulação" size="small" fullWidth />
+                        )} />
+                    </div>
+                    <Button variant="contained">+ Adicionar Simulação</Button>
+                </div>
+            </div>
+            <SimulationBox name="Simulação 1" date="01-01-2023" total={15} />
+
 
 
         </div>

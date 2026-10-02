@@ -4,6 +4,7 @@ import { UpdateTurbineDto } from './dto/update-turbine.dto.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Turbine } from './entities/turbine.entity.js';
 import { Repository } from 'typeorm/browser/repository/Repository.js';
+import { ResponseTurbineDto } from './dto/response-turbine.dto.js';
 
 @Injectable()
 export class TurbinesService {
@@ -18,8 +19,22 @@ export class TurbinesService {
     return await this.turbineRepository.save(turbine);
   }
 
-  async findAll(): Promise<Turbine[]> {
-    return await this.turbineRepository.find();
+  async findAll(): Promise<ResponseTurbineDto[]> {
+    const turbines = await this.turbineRepository.find();
+
+    return turbines.map((turbine) => ({
+      id: turbine.id,
+      name: turbine.name,
+      coordinates: {
+        type: turbine.coordinates.type ?? 'Point',
+        coordinates: [
+          turbine.coordinates.coordinates[0],
+          turbine.coordinates.coordinates[1],
+        ] as [number, number],
+      },
+      turbine_catalog_id: turbine.turbine_catalog_id,
+      simulation_id: turbine.simulation_id,
+    }));
   }
 
   async findOne(id: number): Promise<Turbine> {

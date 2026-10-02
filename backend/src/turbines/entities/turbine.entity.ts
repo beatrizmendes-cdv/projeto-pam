@@ -15,6 +15,12 @@ export class Turbine {
     @Column({ type: "jsonb" })
     coordinates: Point;
 
+    @Column({ type: "int" })
+    turbine_catalog_id: number;
+
+    @Column({ type: "int" })
+    simulation_id: number;
+
     @ManyToOne(() => Simulation, (simulation) => simulation.turbines)
     @JoinColumn({ name: "simulation_id" })
     simulation: Simulation;
