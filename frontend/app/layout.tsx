@@ -38,15 +38,15 @@ export default function RootLayout({ children }: { children: React.ReactNode; })
       <body className="flex h-screen flex-col overflow-hidden bg-[#F8FAFC]">
         <MuiProvider>
           <Header />
-        <div className="flex flex-1 overflow-hidden">
-          <SiderBar />
-          <main className="flex-1 overflow-y-auto p-8">
-            <ReactQueryProvider>
-              {children}
+          <div className="flex flex-1 overflow-hidden">
+            <SiderBar />
+            <main className="flex-1 overflow-y-auto p-8">
+              <ReactQueryProvider>
+                {children}
 
-            </ReactQueryProvider>
-          </main>
-        </div>
+              </ReactQueryProvider>
+            </main>
+          </div>
         </MuiProvider>
       </body>
     </html>
