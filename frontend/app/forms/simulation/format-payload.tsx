@@ -1,9 +1,8 @@
 import { SimulationFormValues } from "./schema";
+import { CreateSimulationDto } from "@/clients/projeto-pam";
 
-export function formatTurbineCatalogPayload(values: SimulationFormValues): CreateTurbineCatalogDto {
+export function formatSimulationPayload(values: SimulationFormValues): CreateSimulationDto {
     return {
         name: values.name.trim(),
-        description: values.description.trim(),
-        turbineId: values.turbineId,
     };
 }

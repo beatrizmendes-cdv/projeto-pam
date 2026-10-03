@@ -90,7 +90,7 @@ export interface CreateTurbineDto {
      * @type {number}
      * @memberof CreateTurbineDto
      */
-    'simulation_id': number;
+    'simulation_id'?: number | null;
     /**
      * ID do catálogo de turbina ao qual a turbina pertence
      * @type {number}
@@ -221,7 +221,7 @@ export interface ResponseTurbineDto {
      * @type {number}
      * @memberof ResponseTurbineDto
      */
-    'simulation_id': number;
+    'simulation_id': number | null;
 }
 /**
  * 
@@ -303,7 +303,7 @@ export interface UpdateTurbineDto {
      * @type {number}
      * @memberof UpdateTurbineDto
      */
-    'simulation_id'?: number;
+    'simulation_id'?: number | null;
     /**
      * ID do catálogo de turbina ao qual a turbina pertence
      * @type {number}
