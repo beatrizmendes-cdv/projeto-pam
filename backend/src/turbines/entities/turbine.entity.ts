@@ -15,17 +15,17 @@ export class Turbine {
     @Column({ type: "jsonb" })
     coordinates: Point;
 
-    @Column({ type: "int" })
+    @Column({ type: "int", nullable: false })
     turbine_catalog_id: number;
 
-    @Column({ type: "int" })
-    simulation_id: number;
+    @Column({ type: "int" , nullable: true})
+    simulation_id: number | null;
 
-    @ManyToOne(() => Simulation, (simulation) => simulation.turbines)
+    @ManyToOne(() => Simulation, (simulation) => simulation.turbines, {nullable:true})
     @JoinColumn({ name: "simulation_id" })
-    simulation: Simulation;
+    simulation: Simulation | null;
 
-    @ManyToOne(() => TurbineCatalog, (turbineCatalog) => turbineCatalog.turbines)
+    @ManyToOne(() => TurbineCatalog, (turbineCatalog) => turbineCatalog.turbines, {nullable:false})
     @JoinColumn({ name: "turbine_catalog_id" })
     turbineCatalog: TurbineCatalog;
 }

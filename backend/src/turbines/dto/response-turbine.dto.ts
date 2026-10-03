@@ -14,6 +14,6 @@ export class ResponseTurbineDto {
   @ApiProperty({ type: Number, example: 1 })
   turbine_catalog_id: number;
 
-  @ApiProperty({ type: Number, example: 1 })
-  simulation_id: number;
+  @ApiProperty({ type: Number, nullable: true, example: null })
+  simulation_id: number | null;
 }
