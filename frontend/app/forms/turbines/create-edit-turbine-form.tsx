@@ -2,11 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { TurbineFormInput, TurbineFormValues, turbineSchema } from "./schema";
 import { Controller, useForm } from "react-hook-form";
 import { useTurbineCatalog } from "@/hooks/use-turbine-catalog";
-import Box from "@mui/material/Box";
-import TextField from "@mui/material/TextField";
-import MenuItem from "@mui/material/MenuItem";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
+import { Alert, Box, Button, CircularProgress, Radio, RadioGroup, TextField } from "@mui/material";
 
 interface CreateEditTurbineFormProps {
     initialValues?: Partial<TurbineFormInput>;
@@ -15,7 +11,7 @@ interface CreateEditTurbineFormProps {
 }
 
 export default function CreateEditTurbineForm({ initialValues, onSubmit, isLoading }: CreateEditTurbineFormProps) {
-    const { data: catalog = [], isPending: isCatalogLoading } = useTurbineCatalog();
+    const { data: catalog = [], isPending: isCatalogLoading, isError: isCatalogError, refetch } = useTurbineCatalog();
 
     const { control, handleSubmit, formState: { errors } } = useForm<TurbineFormInput, any, TurbineFormValues>({
         resolver: zodResolver(turbineSchema),
@@ -28,61 +24,84 @@ export default function CreateEditTurbineForm({ initialValues, onSubmit, isLoadi
     });
 
     return (
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-            <Box>
-                <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Nome da Turbina:</label>
-                <Controller name="name" control={control} render={({ field: { ref, ...field } }) => (
-                    <TextField {...field} inputRef={ref} size="small" fullWidth error={!!errors.name} helperText={errors.name?.message} placeholder="Ex: Turbina 01" />
-                )} />
-            </Box>
-            <Box className="grid grid-cols-2 gap-4">
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Box className="modal-form-body">
                 <Box>
-                    <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Latitude:</label>
-                    <Controller name="latitude" control={control} render={({ field: { ref, ...field } }) => (
-                        <TextField {...field} inputRef={ref} size="small" fullWidth error={!!errors.latitude} helperText={errors.latitude?.message} placeholder="-23.5505" />
+                    <Box component="label" htmlFor="turbine-name" className="modal-field-label">Nome</Box>
+                    <Controller name="name" control={control} render={({ field: { ref, ...field } }) => (
+                        <TextField {...field} id="turbine-name" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.name} helperText={errors.name?.message} placeholder="Digite o nome da turbina..." />
                     )} />
                 </Box>
+
+                <Box className="modal-form-grid">
+                    <Box>
+                        <Box component="label" htmlFor="turbine-latitude" className="modal-field-label">Latitude</Box>
+                        <Controller name="latitude" control={control} render={({ field: { ref, ...field } }) => (
+                            <TextField {...field} id="turbine-latitude" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.latitude} helperText={errors.latitude?.message} placeholder="Digite a latitude..." />
+                        )} />
+                    </Box>
+
+                    <Box>
+                        <Box component="label" htmlFor="turbine-longitude" className="modal-field-label">Longitude</Box>
+                        <Controller name="longitude" control={control} render={({ field: { ref, ...field } }) => (
+                            <TextField {...field} id="turbine-longitude" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.longitude} helperText={errors.longitude?.message} placeholder="Digite a longitude..." />
+                        )} />
+                    </Box>
+                </Box>
+
                 <Box>
-                    <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Longitude:</label>
-                    <Controller name="longitude" control={control} render={({ field: { ref, ...field } }) => (
-                        <TextField {...field} inputRef={ref} size="small" fullWidth error={!!errors.longitude} helperText={errors.longitude?.message} placeholder="-46.6333" />
-                    )} />
+                    <Box className="mb-5 flex items-center gap-4">
+                        <Box component="h3" id="catalog-options-title" className="m-0 text-sm font-semibold uppercase tracking-wider text-[#009B9F]">Modelos registrados</Box>
+                        <Box className="h-px flex-1 bg-[#DCE9EB]" />
+                    </Box>
+
+                    {isCatalogLoading && (
+                        <Box role="status" className="flex items-center gap-3 py-4 text-[#68858C]">
+                            <CircularProgress size={20} />
+                            Carregando modelos...
+                        </Box>
+                    )}
+
+                    {isCatalogError && (
+                        <Alert severity="error" action={<Button type="button" color="inherit" variant="text" onClick={() => void refetch()}>Tentar novamente</Button>}>
+                            Não foi possível carregar os modelos.
+                        </Alert>
+                    )}
+
+                    {!isCatalogLoading && !isCatalogError && catalog.length === 0 && (
+                        <Alert severity="info">Cadastre um modelo no catálogo antes de criar uma turbina.</Alert>
+                    )}
+
+                    {!isCatalogLoading && !isCatalogError && catalog.length > 0 && (
+                        <Controller name="turbineCatalogId" control={control} render={({ field }) => (
+                            <RadioGroup name={field.name} value={field.value} onChange={(event) => field.onChange(Number(event.target.value))} onBlur={field.onBlur} aria-labelledby="catalog-options-title" aria-describedby={errors.turbineCatalogId ? "catalog-options-error" : undefined} className="max-h-80 overflow-y-auto rounded-xl border border-[#D6E5E7]">
+                                {catalog.map((model, index) => (
+                                    <Box component="label" key={model.id} className={`flex items-center gap-3 border-b border-[#E1ECEE] px-4 py-4 last:border-b-0 ${field.value === model.id ? "bg-[#F4FAF9]" : "bg-white"} ${isLoading ? "cursor-default" : "cursor-pointer"}`}>
+                                        <Radio value={model.id} disabled={isLoading} slotProps={{ input: { ref: index === 0 ? field.ref : undefined } }} />
+
+                                        <Box className="min-w-0 flex-1">
+                                            <Box component="p" className="m-0 font-semibold text-[#16494D]">{model.name}</Box>
+                                            <Box component="p" className="m-0 text-sm text-[#68858C]">{model.manufacturer} · Ø {model.rotor_diameter} m</Box>
+                                        </Box>
+
+                                        <Box component="span" className="shrink-0 font-semibold text-[#16494D]">{model.nominal_power} MW</Box>
+                                    </Box>
+                                ))}
+                            </RadioGroup>
+                        )} />
+                    )}
+
+                    {errors.turbineCatalogId && (
+                        <Box component="p" id="catalog-options-error" className="mt-2 text-sm text-[#D32F2F]">{errors.turbineCatalogId.message}</Box>
+                    )}
                 </Box>
             </Box>
-            <Box>
-                <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Modelo do Catálogo:</label>
-                <Controller name="turbineCatalogId" control={control} render={({ field: { ref, value, onChange, ...field } }) => (
-                    <TextField
-                        {...field}
-                        select
-                        inputRef={ref}
-                        size="small"
-                        fullWidth
-                        value={value ?? ""}
-                        onChange={(e) => onChange(Number(e.target.value))}
-                        error={!!errors.turbineCatalogId}
-                        helperText={errors.turbineCatalogId?.message}
-                        disabled={isCatalogLoading}
-                    >
-                        {catalog.length === 0 ? (
-                            <MenuItem disabled value="">Nenhum modelo cadastrado no catálogo</MenuItem>
-                        ) : (
-                            catalog.map((model) => (
-                                <MenuItem key={model.id} value={model.id}>
-                                    {model.name} — {model.manufacturer} ({model.nominal_power} MW)
-                                </MenuItem>
-                            ))
-                        )}
-                    </TextField>
-                )} />
-            </Box>
-            <Box className="flex justify-end mt-4">
-                <Button type="submit" variant="contained" disabled={isLoading} className="bg-[#00BFA6] hover:bg-[#044947] text-white font-bold normal-case px-6 py-2 rounded-lg">
-                    {isLoading ? <CircularProgress size={20} color="inherit" /> : "+ Criar Turbina"}
+
+            <Box className="modal-form-footer">
+                <Button type="submit" disabled={isLoading || isCatalogLoading || isCatalogError || catalog.length === 0}>
+                    {isLoading ? <CircularProgress size={20} color="inherit" /> : "+ Criar"}
                 </Button>
             </Box>
-
-
         </Box>
     );
 }

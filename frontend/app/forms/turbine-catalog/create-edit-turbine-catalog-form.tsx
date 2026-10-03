@@ -23,40 +23,42 @@ export default function CreateEditTurbineCatalogForm({ initialValues, onSubmit, 
         },
     });
 
-    return (
-        <Box component="form" onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-            <Box className="grid grid-cols-2 gap-4">
-                <Box>
-                    <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Nome:</label>
-                    <Controller name="name" control={control} render={({ field: { ref, ...field } }) => (
-                        <TextField {...field} inputRef={ref} size="small" fullWidth error={!!errors.name} helperText={errors.name?.message} placeholder="Nome da Turbina..." />
-                    )} />
-                </Box>
-                <Box>
-                    <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Fabricante:</label>
-                    <Controller name="manufacturer" control={control} render={({ field: { ref, ...field } }) => (
-                        <TextField {...field} inputRef={ref} size="small" fullWidth error={!!errors.manufacturer} helperText={errors.manufacturer?.message} placeholder="Nome do fabricante..." />
-                    )} />
+     return (
+        <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Box className="modal-form-body">
+                <Box className="modal-form-grid">
+                    <Box>
+                        <Box component="label" htmlFor="catalog-name" className="modal-field-label">Nome:</Box>
+                        <Controller name="name" control={control} render={({ field: { ref, ...field } }) => (
+                            <TextField {...field} id="catalog-name" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.name} helperText={errors.name?.message} placeholder="Nome da turbina..." />
+                        )} />
+                    </Box>
+
+                    <Box>
+                        <Box component="label" htmlFor="catalog-manufacturer" className="modal-field-label">Fabricante</Box>
+                        <Controller name="manufacturer" control={control} render={({ field: { ref, ...field } }) => (
+                            <TextField {...field} id="catalog-manufacturer" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.manufacturer} helperText={errors.manufacturer?.message} placeholder="Nome do fabricante..." />
+                        )} />
+                    </Box>
+
+                    <Box>
+                        <Box component="label" htmlFor="catalog-power" className="modal-field-label">Potência (MW)</Box>
+                        <Controller name="nominalPower" control={control} render={({ field: { ref, ...field } }) => (
+                            <TextField {...field} id="catalog-power" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.nominalPower} helperText={errors.nominalPower?.message} placeholder="15.0" />
+                        )} />
+                    </Box>
+
+                    <Box>
+                        <Box component="label" htmlFor="catalog-diameter" className="modal-field-label">Diâmetro do rotor (m)</Box>
+                        <Controller name="rotorDiameter" control={control} render={({ field: { ref, ...field } }) => (
+                            <TextField {...field} id="catalog-diameter" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.rotorDiameter} helperText={errors.rotorDiameter?.message} placeholder="236" />
+                        )} />
+                    </Box>
                 </Box>
             </Box>
 
-            <Box className="grid grid-cols-2 gap-4">
-                <Box>
-                    <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Potência (MW):</label>
-                    <Controller name="nominalPower" control={control} render={({ field: { ref, ...field } }) => (
-                        <TextField {...field} inputRef={ref} size="small" fullWidth error={!!errors.nominalPower} helperText={errors.nominalPower?.message} placeholder="15.0" />
-                    )} />
-                </Box>
-                <Box>
-                    <label className="text-xs font-semibold uppercase text-gray-500 mb-1 block">Diâmetro do Rotor (M):</label>
-                    <Controller name="rotorDiameter" control={control} render={({ field: { ref, ...field } }) => (
-                        <TextField {...field} inputRef={ref} size="small" fullWidth error={!!errors.rotorDiameter} helperText={errors.rotorDiameter?.message} placeholder="236" />
-                    )} />
-                </Box>
-            </Box>
-
-            <Box className="flex justify-end mt-4">
-                <Button type="submit" variant="contained" disabled={isLoading} className="bg-[#00BFA6] hover:bg-[#044947] text-white font-bold normal-case px-6 py-2 rounded-lg">
+            <Box className="modal-form-footer">
+                <Button type="submit" disabled={isLoading}>
                     {isLoading ? <CircularProgress size={20} color="inherit" /> : "+ Criar"}
                 </Button>
             </Box>

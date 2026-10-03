@@ -174,15 +174,15 @@ export default function ClientTurbineCatalog() {
                     </Box>
                 )}
             </Box>
-            <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} maxWidth="sm" fullWidth slotProps={{ paper: { className: "rounded-2xl p-2" } }}>
-                <DialogTitle className="flex justify-between font-sans items-center text-[#044947] font-bold text-lg">
+            <Dialog open={isModalOpen} aria-labelledby="create-catalog-title" onClose={() => setIsModalOpen(false)}>
+                <DialogTitle id="create-catalog-title">
                     Cadastre um novo modelo de turbina
-                    <IconButton onClick={() => setIsModalOpen(false)} size="small">
+                    <IconButton  aria-label="Fechar" onClick={() => setIsModalOpen(false)} disabled={isCreating} >
                         <CloseIcon />
                     </IconButton>
                 </DialogTitle>
                 <DialogContent>
-                    <Box className="pt-2">
+                    <Box>
                         <CreateEditTurbineCatalogForm onSubmit={handleCreateSubmit} isLoading={isCreating} />
                     </Box>
                 </DialogContent>

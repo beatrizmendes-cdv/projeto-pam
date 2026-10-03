@@ -166,8 +166,8 @@ export default function ClientTurbines() {
                     </Box>
                 )}
             </Box>
-            <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} maxWidth="sm" aria-labelledby="create-turbine-title" fullWidth slotProps={{ paper: { sx: { borderRadius: "18px", border: "1px solid #CDDEE0", backgroundColor: "#FFFFFF" } } }}>
-                <DialogTitle id="create-turbine-title" sx={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 2, px: { xs: 2, sm: 4 }, py: 3, borderBottom: "1px solid #E1ECEE", color: "#044947", fontFamily: "var(--font-outfit), sans-serif", fontWeight: 700, fontSize: { xs: "22px", sm: "28px" }, }}>
+            <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} maxWidth="sm" aria-labelledby="create-turbine-title" >
+                <DialogTitle id="create-turbine-title">
                     Cadastre uma nova turbina
                     <IconButton onClick={() => setIsModalOpen(false)} size="small" sx={{ color: "#94A3B8" }}>
                         <CloseIcon />
