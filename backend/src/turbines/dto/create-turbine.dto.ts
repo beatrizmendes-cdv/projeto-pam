@@ -49,7 +49,7 @@ export class CreateTurbineDto {
     })
     @IsOptional()
     @IsNumber({}, { message: "O ID da simulação deve ser um número." })
-    simulation_id?: number|null;
+    simulation_id?: number | null;
 
     @ApiProperty({
         type: Number,

@@ -566,6 +566,7 @@
           },
           "simulation_id": {
             "type": "number",
+            "nullable": true,
             "description": "ID da simulacão a qual a turbina pertence",
             "example": 1
           },
@@ -578,7 +579,6 @@
         "required": [
           "name",
           "coordinates",
-          "simulation_id",
           "turbine_catalog_id"
         ]
       },
@@ -602,7 +602,8 @@
           },
           "simulation_id": {
             "type": "number",
-            "example": 1
+            "nullable": true,
+            "example": null
           }
         },
         "required": [
@@ -631,6 +632,7 @@
           },
           "simulation_id": {
             "type": "number",
+            "nullable": true,
             "description": "ID da simulacão a qual a turbina pertence",
             "example": 1
           },
