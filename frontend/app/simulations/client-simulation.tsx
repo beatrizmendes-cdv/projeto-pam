@@ -70,15 +70,17 @@ export default function ClientSimulation() {
             </Box>
 
             <Box className="mt-5 rounded-xl border border-gray-200 bg-white p-3">
-                <Box className="flex flex-col gap-3 sm:flex-row sm:items-center">
-                    <Box className="w-full min-w-0 sm:max-w-md sm:flex-1">
-                        <Controller name="search" control={control} render={({ field: { ref, ...field } }) => (
-                            <TextField {...field} inputRef={ref} label="Procurar simulação..." placeholder="Nome da simulação" size="small" fullWidth />
-                        )} />
-                    </Box>
-                    <Button onClick={openModal} className="shrink-0 sm:ml-auto">+ Adicionar Simulação</Button>
-                </Box>
-            </Box>
+    <Box className="flex w-full flex-wrap items-center justify-between gap-4">
+        <Box className="min-w-0 flex-1 basis-60 max-w-md">
+            <Controller name="search" control={control} render={({ field: { ref, ...field } }) => (
+                <TextField {...field} inputRef={ref} label="Procurar simulação..." placeholder="Nome da simulação" size="small" fullWidth />
+            )} />
+        </Box>
+        <Box className="ml-auto shrink-0">
+            <Button onClick={openModal}>+ Adicionar Simulação</Button>
+        </Box>
+    </Box>
+</Box>
 
             {isPending || isTurbinesLoading ? (
                 <Box role="status" className="flex items-center gap-3 p-6 text-[#64748B]">
