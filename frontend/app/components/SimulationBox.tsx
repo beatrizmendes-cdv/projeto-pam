@@ -1,26 +1,25 @@
+import Box from "@mui/material/Box";
 
 type BoxProps = {
     name: string;
     date: string;
     total: number;
     onClick?: () => void;
+};
 
-}
 export default function SimulationBox({ name, date, total }: BoxProps) {
     return (
-        <div className=" border border-gray-200 w-72 h-56 rounded-xl p-6 bg-white mt-2 border-t-4 border-t-[#10B981] overflow-hidden">
-            <h1 className="text-[#044947] font-sans font-semibold">{name}</h1>
-            <p className="text-[#64748B] font-mono font-light text-xs pt-1">{date}</p>
+        <Box className="min-w-0 w-full min-h-56 rounded-xl border border-gray-200 border-t-4 border-t-[#10B981] bg-white p-5">
+            <h2 className="font-sans font-semibold text-[#044947]">{name}</h2>
+            <p className="pt-1 font-mono text-xs font-light text-[#64748B]">{date}</p>
 
-            <div className="mt-5 pt-3 pb-5 border-y border-gray-100">
-                <p className="text-xs font-light pb-1 text-[#94A3B8]">Total de turbinas</p>
-                <div className="flex gap-1 items-baseline">
-                    <span className=" text-[#044947] font-mono font-semibold text-2xl">{total}</span>
-                    <span className="text-[#64748B] font-sans font-light text-sm">turbinas</span>
-                </div>
-            </div>
-
-
-        </div>
+            <Box className="mt-5 border-y border-gray-100 pb-5 pt-3">
+                <p className="pb-1 text-xs font-light text-[#94A3B8]">Total de turbinas</p>
+                <Box className="flex items-baseline gap-1">
+                    <span className="font-mono text-2xl font-semibold text-[#044947]">{total}</span>
+                    <span className="font-sans text-sm font-light text-[#64748B]">turbinas</span>
+                </Box>
+            </Box>
+        </Box>
     );
 }

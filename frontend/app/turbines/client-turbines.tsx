@@ -166,19 +166,17 @@ export default function ClientTurbines() {
                     </Box>
                 )}
             </Box>
-            <Dialog open={isModalOpen} onClose={() => setIsModalOpen(false)} maxWidth="sm" aria-labelledby="create-turbine-title" >
-                <DialogTitle id="create-turbine-title">
-                    Cadastre uma nova turbina
-                    <IconButton onClick={() => setIsModalOpen(false)} size="small" sx={{ color: "#94A3B8" }}>
-                        <CloseIcon />
-                    </IconButton>
-                </DialogTitle>
-                <DialogContent>
-                    <Box className="pt-2">
-                        <CreateEditTurbineForm onSubmit={handleCreateSubmit} isLoading={isCreating} />
-                    </Box>
-                </DialogContent>
-            </Dialog>
+            <Dialog open={isModalOpen} onClose={() => { if (!isCreating) setIsModalOpen(false); }} aria-labelledby="create-turbine-title">
+    <DialogTitle id="create-turbine-title">
+        Cadastre uma nova turbina
+        <IconButton onClick={() => setIsModalOpen(false)} disabled={isCreating} size="small" aria-label="Fechar modal">
+            <CloseIcon />
+        </IconButton>
+    </DialogTitle>
+    <DialogContent className="turbine-dialog-content">
+        <CreateEditTurbineForm onSubmit={handleCreateSubmit} isLoading={isCreating} />
+    </DialogContent>
+</Dialog>
         </Box>
     );
 }

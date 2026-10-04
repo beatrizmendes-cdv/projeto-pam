@@ -1,83 +1,115 @@
 "use client";
-import { useSimulation } from "@/hooks/use-simulation";
-import { Controller, useForm, useWatch } from "react-hook-form";
-import { Card } from "../components/Card";
-import CircularProgress from "@mui/material/CircularProgress";
-import TextField from "@mui/material/TextField";
-import SimulationBox from "../components/SimulationBox";
-import Button from "@mui/material/Button";
-import Alert from "@mui/material/Alert";
 
-type SeachForm = {
+import { useState } from "react";
+import { isAxiosError } from "axios";
+import { Controller, useForm, useWatch } from "react-hook-form";
+import { Alert, Box, Button, CircularProgress, Dialog, DialogContent, DialogTitle, IconButton, TextField } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { useSimulation } from "@/hooks/use-simulation";
+import { useTurbine } from "@/hooks/use-turbine";
+import { Card } from "../components/Card";
+import SimulationBox from "../components/SimulationBox";
+import CreateEditSimulationForm from "../forms/simulation/create-edit-simulation-form";
+import { formatSimulationPayload } from "../forms/simulation/format-payload";
+import type { SimulationFormValues } from "../forms/simulation/schema";
+
+type SearchForm = {
     search: string;
-}
+};
+
 export default function ClientSimulation() {
-    const { data: simulation = [], isPending, isError, refetch } = useSimulation();
-    const { control } = useForm<SeachForm>({ defaultValues: { search: "" } });
-    const search = useWatch({ control, name: "search" })
-    const term = search.trim().toLocaleLowerCase("pt-BR")
-    const filteredSimulation = (simulation.filter((model) => {
-        const name = model.name.toLocaleLowerCase("pt-BR");
-        return name.includes(term);
-    }));
+    const { data: simulation = [], isPending, isError, refetch, createSimulation, isCreating } = useSimulation();
+    const { data: turbines = [], isPending: isTurbinesLoading, isError: isTurbinesError, refetch: refetchTurbines } = useTurbine();
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [submitError, setSubmitError] = useState<string | null>(null);
+
+    const { control } = useForm<SearchForm>({ defaultValues: { search: "" } });
+    const search = useWatch({ control, name: "search" });
+    const term = search.trim().toLocaleLowerCase("pt-BR");
+    const filteredSimulation = simulation.filter((item) => item.name.toLocaleLowerCase("pt-BR").includes(term));
+
+    const openModal = () => {
+        setSubmitError(null);
+        setIsModalOpen(true);
+        void refetchTurbines();
+    };
+
+    const closeModal = () => {
+        if (!isCreating) setIsModalOpen(false);
+    };
+
+    const handleCreateSubmit = async (values: SimulationFormValues) => {
+        setSubmitError(null);
+
+        try {
+            await createSimulation(formatSimulationPayload(values));
+            setIsModalOpen(false);
+        } catch (error) {
+            let message = "Não foi possível criar a simulação.";
+
+            if (isAxiosError<{ message?: string | string[] }>(error)) {
+                const apiMessage = error.response?.data?.message;
+
+                if (typeof apiMessage === "string") message = apiMessage;
+                if (Array.isArray(apiMessage)) message = apiMessage.join(" ");
+            }
+
+            setSubmitError(message);
+            void refetchTurbines();
+        }
+    };
 
     return (
-        <div>
+        <Box>
             <h1 className="text-2xl font-bold text-[#044947]">Simulações</h1>
-            <p className="text-[#64748B] font-light pb-4 pt-1 ">
-                Cadastre e gerencie todos as simulações.
-            </p>
-            <div className="pt-2 w-82">
+            <p className="pb-4 pt-1 font-light text-[#64748B]">Cadastre e gerencie todas as simulações.</p>
+
+            <Box className="w-full max-w-82 pt-2">
                 <Card label="Total:" unit="simulações" value={isPending || isError ? "-" : simulation.length} />
-            </div>
-            <div className="mt-5 border border-gray-200 p-3 rounded-xl bg-white">
-                <div className="flex justify-between ">
-                    <div className="w-full max-w-md ">
+            </Box>
+
+            <Box className="mt-5 rounded-xl border border-gray-200 bg-white p-3">
+                <Box className="flex flex-col gap-3 sm:flex-row sm:items-center">
+                    <Box className="w-full min-w-0 sm:max-w-md sm:flex-1">
                         <Controller name="search" control={control} render={({ field: { ref, ...field } }) => (
                             <TextField {...field} inputRef={ref} label="Procurar simulação..." placeholder="Nome da simulação" size="small" fullWidth />
                         )} />
-                    </div>
-                    <Button variant="contained">+ Adicionar Simulação</Button>
-                </div>
-            </div>
-            {isPending ? (
-                <div
-                    role="status"
-                    className="flex items-center gap-3 p-6 text-[#64748B]"
-                >
+                    </Box>
+                    <Button onClick={openModal} className="shrink-0 sm:ml-auto">+ Adicionar Simulação</Button>
+                </Box>
+            </Box>
+
+            {isPending || isTurbinesLoading ? (
+                <Box role="status" className="flex items-center gap-3 p-6 text-[#64748B]">
                     <CircularProgress size={24} />
                     <p>Carregando simulações...</p>
-                </div>
-            ) : isError ? (
-                <div className="mt-4">
-                    <Alert
-                        severity="error"
-                        action={
-                            <Button color="inherit" onClick={() => refetch()}>
-                                Tentar novamente
-                            </Button>
-                        }
-                    >
-                        Não foi possível carregar as simulações.
-                    </Alert>
-                </div>
+                </Box>
+            ) : isError || isTurbinesError ? (
+                <Alert className="mt-4" severity="error" action={<Button color="inherit" variant="text" onClick={() => { void refetch(); void refetchTurbines(); }}>Tentar novamente</Button>}>
+                    Não foi possível carregar as simulações e suas turbinas.
+                </Alert>
             ) : filteredSimulation.length === 0 ? (
-                <p className="mt-6 text-[#64748B]">
-                    {simulation.length === 0
-                        ? "Nenhuma simulação cadastrada."
-                        : "Nenhuma simulação encontrada para essa busca."}
-                </p>
+                <p className="mt-6 text-[#64748B]">{simulation.length === 0 ? "Nenhuma simulação cadastrada." : "Nenhuma simulação encontrada para essa busca."}</p>
             ) : (
-                <div className="mt-4 grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
+                <Box className="mt-4 grid gap-4" sx={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 260px), 1fr))" }}>
                     {filteredSimulation.map((item) => (
-                        <SimulationBox
-                            name={item.name}
-                            total={15}
-                            date="12-9-26"
-                        />
+                        <SimulationBox key={item.id} name={item.name} total={turbines.filter((turbine) => turbine.simulation_id === item.id).length} date="" />
                     ))}
-                </div>
+                </Box>
             )}
-        </div>
+
+            <Dialog open={isModalOpen} onClose={closeModal} aria-labelledby="create-simulation-title">
+                <DialogTitle id="create-simulation-title">
+                    Crie uma nova simulação
+                    <IconButton onClick={closeModal} disabled={isCreating} size="small" aria-label="Fechar modal">
+                        <CloseIcon />
+                    </IconButton>
+                </DialogTitle>
+                <DialogContent className="turbine-dialog-content">
+                    {isModalOpen && <CreateEditSimulationForm onSubmit={handleCreateSubmit} isLoading={isCreating} submitError={submitError} />}
+                </DialogContent>
+            </Dialog>
+        </Box>
     );
 }

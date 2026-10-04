@@ -21,9 +21,11 @@ export function useSimulation() {
             const response = await simulationApi.simulationControllerCreate(payload);
             return response.data;
         },
-        onSuccess: () => {
-            queryClient.invalidateQueries({ queryKey: ["simulation"] });
-        }
+        onSuccess: async () => {
+            await Promise.all([
+                queryClient.invalidateQueries({ queryKey: ["simulation"] }),
+                queryClient.invalidateQueries({ queryKey: ["turbine"] }),
+            ]);        }
     });
     return {
         ...query,

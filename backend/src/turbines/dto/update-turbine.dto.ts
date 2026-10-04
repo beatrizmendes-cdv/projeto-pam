@@ -1,4 +1,5 @@
-import { PartialType } from '@nestjs/swagger';
+import { OmitType, PartialType } from '@nestjs/swagger';
 import { CreateTurbineDto } from './create-turbine.dto.js';
 
-export class UpdateTurbineDto extends PartialType(CreateTurbineDto) {}
+
+export class UpdateTurbineDto extends PartialType(OmitType(CreateTurbineDto, ["simulation_id"] as const)) {}
