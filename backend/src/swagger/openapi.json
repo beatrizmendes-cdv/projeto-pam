@@ -630,12 +630,6 @@
               }
             ]
           },
-          "simulation_id": {
-            "type": "number",
-            "nullable": true,
-            "description": "ID da simulacão a qual a turbina pertence",
-            "example": 1
-          },
           "turbine_catalog_id": {
             "type": "number",
             "description": "ID do catálogo de turbina ao qual a turbina pertence",
@@ -748,28 +742,35 @@
             "type": "string",
             "description": "Nome da simulacao",
             "example": "Simulacao 1"
+          },
+          "turbine_ids": {
+            "description": "id das turbinas",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
           }
         },
         "required": [
-          "name"
+          "name",
+          "turbine_ids"
         ]
       },
       "ResponseSimulationDto": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "Nome da simulacao",
-            "example": "Simulacao 1"
-          },
           "id": {
             "type": "number",
             "example": 1
+          },
+          "name": {
+            "type": "string",
+            "example": "Simulacao 1"
           }
         },
         "required": [
-          "name",
-          "id"
+          "id",
+          "name"
         ]
       },
       "UpdateSimulationDto": {
