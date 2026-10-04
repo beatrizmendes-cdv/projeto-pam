@@ -1,7 +1,7 @@
-// import ClientSimulation from "./client-simulation";
+import ClientSimulation from "./client-simulation";
 
-// export default function SimulationPage() {
-//     return (
-//         <ClientSimulation />
-//     );
-// }
+export default function SimulationPage() {
+    return (
+        <ClientSimulation />
+    );
+}

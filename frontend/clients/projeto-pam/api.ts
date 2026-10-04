@@ -35,6 +35,12 @@ export interface CreateSimulationDto {
      * @memberof CreateSimulationDto
      */
     'name': string;
+    /**
+     * id das turbinas
+     * @type {Array<number>}
+     * @memberof CreateSimulationDto
+     */
+    'turbine_ids': Array<number>;
 }
 /**
  * 
@@ -131,17 +137,17 @@ export type PointCoordinatesDtoTypeEnum = typeof PointCoordinatesDtoTypeEnum[key
  */
 export interface ResponseSimulationDto {
     /**
-     * Nome da simulacao
-     * @type {string}
-     * @memberof ResponseSimulationDto
-     */
-    'name': string;
-    /**
      * 
      * @type {number}
      * @memberof ResponseSimulationDto
      */
     'id': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ResponseSimulationDto
+     */
+    'name': string;
 }
 /**
  * 
@@ -298,12 +304,6 @@ export interface UpdateTurbineDto {
      * @memberof UpdateTurbineDto
      */
     'coordinates'?: PointCoordinatesDto;
-    /**
-     * ID da simulacão a qual a turbina pertence
-     * @type {number}
-     * @memberof UpdateTurbineDto
-     */
-    'simulation_id'?: number | null;
     /**
      * ID do catálogo de turbina ao qual a turbina pertence
      * @type {number}

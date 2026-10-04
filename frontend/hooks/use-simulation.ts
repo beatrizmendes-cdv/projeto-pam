@@ -25,11 +25,12 @@ export function useSimulation() {
             await Promise.all([
                 queryClient.invalidateQueries({ queryKey: ["simulation"] }),
                 queryClient.invalidateQueries({ queryKey: ["turbine"] }),
-            ]);        }
+            ]);
+        }
     });
     return {
         ...query,
-        createTurbine: createMutation.mutateAsync,
+        createSimulation: createMutation.mutateAsync,
         isCreating: createMutation.isPending,
 
     };
