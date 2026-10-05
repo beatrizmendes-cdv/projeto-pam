@@ -9,17 +9,18 @@ import { simulationSchema, type SimulationFormInput, type SimulationFormValues }
 
 interface CreateEditSimulationFormProps {
     initialValues?: Partial<SimulationFormInput>;
+    simulationId?: number;
     onSubmit: (values: SimulationFormValues) => Promise<void> | void;
     isLoading: boolean;
     submitError?: string | null;
-
 }
 
-export default function CreateEditSimulationForm({ initialValues, onSubmit, isLoading, submitError }: CreateEditSimulationFormProps) {
+export default function CreateEditSimulationForm({ initialValues, simulationId, onSubmit, isLoading, submitError }: CreateEditSimulationFormProps) {
     const { data: turbines = [], isPending: isTurbinesLoading, isError: isTurbinesError, refetch: refetchTurbines } = useTurbine();
     const { data: catalog = [], isPending: isCatalogLoading, isError: isCatalogError, refetch: refetchCatalog } = useTurbineCatalog();
 
-    const availableTurbines = turbines.filter((turbine) => turbine.simulation_id === null);
+    const isEditing = simulationId !== undefined;
+    const availableTurbines = turbines.filter((turbine) => turbine.simulation_id === null || turbine.simulation_id === simulationId);
     const isListLoading = isTurbinesLoading || isCatalogLoading;
     const isListError = isTurbinesError || isCatalogError;
 
@@ -35,7 +36,7 @@ export default function CreateEditSimulationForm({ initialValues, onSubmit, isLo
         const hasUnavailableTurbine = values.turbineIds.some((id) => !availableTurbines.some((turbine) => turbine.id === id));
 
         if (hasUnavailableTurbine) {
-            setError("turbineIds", { message: "Uma turbina selecionada não está disponível." });
+            setError("turbineIds", { message: "Uma turbina selecionada não está disponível. Feche e abra o formulário para atualizar a seleção." });
             return;
         }
 
@@ -56,7 +57,7 @@ export default function CreateEditSimulationForm({ initialValues, onSubmit, isLo
 
                 <Box className="model-selection">
                     <Box className="mb-3 flex shrink-0 items-center gap-3">
-                        <Box component="h3" id="simulation-turbines-title" className="m-0 text-sm font-semibold uppercase tracking-wider text-[#009B9F]">Turbinas disponíveis</Box>
+                        <Box component="h3" id="simulation-turbines-title" className="m-0 text-sm font-semibold uppercase tracking-wider text-[#009B9F]">Turbinas</Box>
                         <Box className="h-px flex-1 bg-[#DCE9EB]" />
                     </Box>
 
@@ -74,7 +75,7 @@ export default function CreateEditSimulationForm({ initialValues, onSubmit, isLo
                     )}
 
                     {!isListLoading && !isListError && availableTurbines.length === 0 && (
-                        <Alert severity="info">Não há turbinas livres. Cadastre uma turbina antes de criar a simulação.</Alert>
+                        <Alert severity="info">Não há turbinas disponíveis para selecionar.</Alert>
                     )}
 
                     {!isListLoading && !isListError && availableTurbines.length > 0 && (
@@ -88,13 +89,11 @@ export default function CreateEditSimulationForm({ initialValues, onSubmit, isLo
                                     return (
                                         <Box component="label" key={turbine.id} className={`flex items-center gap-2 border-b border-[#E1ECEE] px-3 py-2 last:border-b-0 ${selected ? "bg-[#F4FAF9]" : "bg-white"} ${isLoading ? "cursor-default" : "cursor-pointer"}`}>
                                             <Checkbox name={field.name} checked={selected} disabled={isLoading} onBlur={field.onBlur} slotProps={{ input: { ref: index === 0 ? field.ref : undefined } }} onChange={(_, checked) => field.onChange(checked ? [...field.value, turbine.id] : field.value.filter((id) => id !== turbine.id))} sx={{ color: "#A8C6CA", "&.Mui-checked": { color: "#20B8AE" } }} />
-
                                             <Box className="min-w-0 flex-1">
                                                 <Box component="p" className="m-0 text-sm font-semibold text-[#16494D]">{turbine.name}</Box>
                                                 <Box component="p" className="m-0 text-xs text-[#68858C]">{model ? `${model.manufacturer} · Ø ${model.rotor_diameter} m` : "Modelo não encontrado"}</Box>
                                                 <Box component="p" className="m-0 text-xs text-[#68858C]">Lat: {latitude}° · Lon: {longitude}°</Box>
                                             </Box>
-
                                             <Box component="span" className="shrink-0 text-sm font-semibold text-[#16494D]">{model ? `${model.nominal_power} MW` : "—"}</Box>
                                         </Box>
                                     );
@@ -103,15 +102,13 @@ export default function CreateEditSimulationForm({ initialValues, onSubmit, isLo
                         )} />
                     )}
 
-                    {errors.turbineIds && (
-                        <Box component="p" id="simulation-turbines-error" className="mt-2 shrink-0 text-sm text-[#D32F2F]">{errors.turbineIds.message}</Box>
-                    )}
+                    {errors.turbineIds && <Box component="p" id="simulation-turbines-error" className="mt-2 shrink-0 text-sm text-[#D32F2F]">{errors.turbineIds.message}</Box>}
                 </Box>
             </Box>
 
             <Box className="modal-form-footer">
                 <Button type="submit" disabled={isLoading || isListLoading || isListError || availableTurbines.length === 0}>
-                    {isLoading ? <CircularProgress size={20} color="inherit" /> : "+ Criar"}
+                    {isLoading ? <CircularProgress size={20} color="inherit" /> : isEditing ? "Salvar alterações" : "+ Criar"}
                 </Button>
             </Box>
         </Box>

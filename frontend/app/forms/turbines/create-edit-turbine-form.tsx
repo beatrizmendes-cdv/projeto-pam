@@ -10,9 +10,10 @@ interface CreateEditTurbineFormProps {
     initialValues?: Partial<TurbineFormInput>;
     onSubmit: (values: TurbineFormValues) => Promise<void> | void;
     isLoading: boolean;
+    isEditing?: boolean;
 }
 
-export default function CreateEditTurbineForm({ initialValues, onSubmit, isLoading }: CreateEditTurbineFormProps) {
+export default function CreateEditTurbineForm({ initialValues, onSubmit, isLoading, isEditing = false }: CreateEditTurbineFormProps) {
     const { data: catalog = [], isPending: isCatalogLoading, isError: isCatalogError, refetch } = useTurbineCatalog();
 
     const { control, handleSubmit, formState: { errors } } = useForm<TurbineFormInput, unknown, TurbineFormValues>({
@@ -101,7 +102,7 @@ export default function CreateEditTurbineForm({ initialValues, onSubmit, isLoadi
 
             <Box className="modal-form-footer">
                 <Button type="submit" disabled={isLoading || isCatalogLoading || isCatalogError || catalog.length === 0}>
-                    {isLoading ? <CircularProgress size={20} color="inherit" /> : "+ Criar"}
+                    {isLoading ? <CircularProgress size={20} color="inherit" /> : isEditing ? "Salvar alterações" : "+ Criar"}
                 </Button>
             </Box>
         </Box>
