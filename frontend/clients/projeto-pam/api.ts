@@ -254,6 +254,12 @@ export interface UpdateSimulationDto {
      * @memberof UpdateSimulationDto
      */
     'name'?: string;
+    /**
+     * id das turbinas
+     * @type {Array<number>}
+     * @memberof UpdateSimulationDto
+     */
+    'turbine_ids'?: Array<number>;
 }
 /**
  * 

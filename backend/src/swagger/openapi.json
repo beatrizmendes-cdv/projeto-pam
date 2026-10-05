@@ -780,6 +780,13 @@
             "type": "string",
             "description": "Nome da simulacao",
             "example": "Simulacao 1"
+          },
+          "turbine_ids": {
+            "description": "id das turbinas",
+            "type": "array",
+            "items": {
+              "type": "number"
+            }
           }
         }
       }
