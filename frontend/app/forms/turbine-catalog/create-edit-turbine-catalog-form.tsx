@@ -1,19 +1,19 @@
-import { turbineCatalogSchema, type TurbineCatalogFormInput, type TurbineCatalogFormValues } from "./schema";
+"use client";
+
 import { zodResolver } from "@hookform/resolvers/zod";
-import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
-import CircularProgress from "@mui/material/CircularProgress";
-import TextField from "@mui/material/TextField";
 import { Controller, useForm } from "react-hook-form";
+import { Box, Button, CircularProgress, TextField } from "@mui/material";
+import { turbineCatalogSchema, type TurbineCatalogFormInput, type TurbineCatalogFormValues } from "./schema";
 
 interface CreateEditTurbineCatalogFormProps {
     initialValues?: Partial<TurbineCatalogFormInput>;
     onSubmit: (values: TurbineCatalogFormValues) => Promise<void> | void;
     isLoading: boolean;
+    isEditing?: boolean;
 }
 
-export default function CreateEditTurbineCatalogForm({ initialValues, onSubmit, isLoading }: CreateEditTurbineCatalogFormProps) {
-    const { control, handleSubmit, formState: { errors } } = useForm<TurbineCatalogFormInput, any, TurbineCatalogFormValues>({
+export default function CreateEditTurbineCatalogForm({ initialValues, onSubmit, isLoading, isEditing = false }: CreateEditTurbineCatalogFormProps) {
+    const { control, handleSubmit, formState: { errors } } = useForm<TurbineCatalogFormInput, unknown, TurbineCatalogFormValues>({
         resolver: zodResolver(turbineCatalogSchema),
         defaultValues: {
             name: initialValues?.name ?? "",
@@ -23,12 +23,12 @@ export default function CreateEditTurbineCatalogForm({ initialValues, onSubmit, 
         },
     });
 
-     return (
+    return (
         <Box component="form" onSubmit={handleSubmit(onSubmit)} noValidate>
             <Box className="modal-form-body">
                 <Box className="modal-form-grid">
                     <Box>
-                        <Box component="label" htmlFor="catalog-name" className="modal-field-label">Nome:</Box>
+                        <Box component="label" htmlFor="catalog-name" className="modal-field-label">Nome</Box>
                         <Controller name="name" control={control} render={({ field: { ref, ...field } }) => (
                             <TextField {...field} id="catalog-name" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.name} helperText={errors.name?.message} placeholder="Nome da turbina..." />
                         )} />
@@ -59,7 +59,7 @@ export default function CreateEditTurbineCatalogForm({ initialValues, onSubmit, 
 
             <Box className="modal-form-footer">
                 <Button type="submit" disabled={isLoading}>
-                    {isLoading ? <CircularProgress size={20} color="inherit" /> : "+ Criar"}
+                    {isLoading ? <CircularProgress size={20} color="inherit" /> : isEditing ? "Salvar alterações" : "+ Criar"}
                 </Button>
             </Box>
         </Box>

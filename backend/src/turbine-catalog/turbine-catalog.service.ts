@@ -3,7 +3,7 @@ import { CreateTurbineCatalogDto } from './dto/create-turbine-catalog.dto.js';
 import { UpdateTurbineCatalogDto } from './dto/update-turbine-catalog.dto.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { TurbineCatalog } from './entities/turbine-catalog.entity.js';
-import { Repository } from 'typeorm';
+import { Not, QueryFailedError, Repository } from 'typeorm';
 
 @Injectable()
 export class TurbineCatalogService {
@@ -33,15 +33,36 @@ export class TurbineCatalogService {
     return turbineCatalog;
   }
 
-  async update(id: number, updateTurbineCatalogDto: UpdateTurbineCatalogDto): Promise<TurbineCatalog> {
-    const catalog = await this.findOne(id);
-    const update = this.catalogRepository.merge(catalog, updateTurbineCatalogDto);
-    return await this.catalogRepository.save(update);
-  }
+    async update(id: number, dto: UpdateTurbineCatalogDto): Promise<TurbineCatalog> {
+        const catalog = await this.findOne(id);
+        const updated = this.catalogRepository.merge(catalog, dto);
+
+        const exists = await this.catalogRepository.findOneBy({ id: Not(id), name: updated.name, manufacturer: updated.manufacturer });
+
+        if (exists) {
+            throw new ConflictException("Já existe outro modelo com o mesmo nome e fabricante.");
+        }
+
+        return this.catalogRepository.save(updated);
+    }
 
   async remove(id: number): Promise<{ message: string }> {
-    const catalog = await this.findOne(id);
-    await this.catalogRepository.remove(catalog);
-    return { message: "Turbina removida com sucesso." }
-  }
+        const catalog = await this.findOne(id);
+
+        try {
+            await this.catalogRepository.remove(catalog);
+        } catch (error) {
+            if (error instanceof QueryFailedError) {
+                const databaseError = error.driverError as { code?: string };
+
+                if (databaseError.code === "23503") {
+                    throw new ConflictException("Este modelo está associado a turbinas e não pode ser excluído.");
+                }
+            }
+
+            throw error;
+        }
+
+        return { message: "Modelo removido com sucesso." };
+    }
 }
