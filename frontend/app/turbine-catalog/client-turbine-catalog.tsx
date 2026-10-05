@@ -178,7 +178,7 @@ export default function ClientTurbineCatalog() {
                                             <span className="text-xs font-semibold font-sans uppercase text-gray-400">Fabricante</span>
                                         </TableCell>
                                         <TableCell align="right">
-                                            <span className="text-xs font-semibold font-sans uppercase text-gray-400">Ações</span>
+                                            <span className="text-xs font-semibold font-sans uppercase text-gray-400"></span>
                                         </TableCell>
                                     </TableRow>
                                 </TableHead>
