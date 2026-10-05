@@ -1,8 +1,7 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import type { Point } from "geojson";
 import { Simulation } from "../../simulation/entities/simulation.entity.js";
 import { TurbineCatalog } from "../../turbine-catalog/entities/turbine-catalog.entity.js";
-
 
 @Entity("turbine")
 export class Turbine {
@@ -18,14 +17,14 @@ export class Turbine {
     @Column({ type: "int", nullable: false })
     turbine_catalog_id: number;
 
-    @Column({ type: "int" , nullable: true})
+    @Column({ type: "int", nullable: true })
     simulation_id: number | null;
 
-    @ManyToOne(() => Simulation, (simulation) => simulation.turbines, {nullable:true})
+    @ManyToOne(() => Simulation, (simulation) => simulation.turbines, { nullable: true })
     @JoinColumn({ name: "simulation_id" })
     simulation: Simulation | null;
 
-    @ManyToOne(() => TurbineCatalog, (turbineCatalog) => turbineCatalog.turbines, {nullable:false})
+    @ManyToOne(() => TurbineCatalog, (catalog) => catalog.turbines, { nullable: false })
     @JoinColumn({ name: "turbine_catalog_id" })
     turbineCatalog: TurbineCatalog;
 }

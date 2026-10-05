@@ -9,7 +9,6 @@ export function formatTurbinePayload(values: TurbineFormValues): CreateTurbineDt
             coordinates: [values.longitude, values.latitude]
         },
         turbine_catalog_id: values.turbineCatalogId,
-        simulation_id: (values as any).simulationId ?? null,
 
     };
 }

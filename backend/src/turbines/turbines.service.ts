@@ -3,8 +3,8 @@ import { CreateTurbineDto } from './dto/create-turbine.dto.js';
 import { UpdateTurbineDto } from './dto/update-turbine.dto.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Turbine } from './entities/turbine.entity.js';
-import { Repository } from 'typeorm/browser/repository/Repository.js';
 import { ResponseTurbineDto } from './dto/response-turbine.dto.js';
+import { Not, Repository } from "typeorm";
 
 @Injectable()
 export class TurbinesService {
@@ -45,11 +45,23 @@ export class TurbinesService {
     return turbine;
   }
 
-  async update(id: number, updateTurbineDto: UpdateTurbineDto): Promise<Turbine> {
-    const turbine = await this.findOne(id);
-    const update = this.turbineRepository.merge(turbine, updateTurbineDto);
-    return await this.turbineRepository.save(update);
-  }
+  async update(id: number, dto: UpdateTurbineDto): Promise<Turbine> {
+    await this.findOne(id);
+
+    if (dto.coordinates !== undefined) {
+        const exists = await this.turbineRepository.findOneBy({ id: Not(id), coordinates: dto.coordinates });
+
+        if (exists) {
+            throw new ConflictException("Já existe outra turbina com essas coordenadas.");
+        }
+    }
+
+    if (Object.keys(dto).length > 0) {
+        await this.turbineRepository.update(id, dto);
+    }
+
+    return this.findOne(id);
+}
 
   async remove(id: number): Promise<{ message: string }> {
     const turbine = await this.findOne(id);
