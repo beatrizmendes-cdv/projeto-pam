@@ -5,6 +5,29 @@ import { Controller, useForm } from "react-hook-form";
 import { Alert, Box, Button, CircularProgress, Radio, RadioGroup, TextField } from "@mui/material";
 import { useTurbineCatalog } from "@/hooks/use-turbine-catalog";
 import { turbineSchema, type TurbineFormInput, type TurbineFormValues } from "./schema";
+import { forwardRef } from "react";
+import { IMaskInput } from "react-imask";
+
+interface MaskProps {
+    onChange: (event: { target: { name: string; value: string } }) => void;
+    name: string;
+}
+
+const latitudeMask = forwardRef<HTMLInputElement, MaskProps>(
+    function LatitudeMaskInput(props, ref) {
+        const { onChange, ...other } = props;
+        return (<IMaskInput {...other} inputRef={ref} mask={Number} scale={6} radix="." mapToRadix={[","]} min={-33.752085} max={5.271831} onAccept={(value: any) => onChange({ target: { name: props.name, value } })} overwrite />)
+    }
+)
+const longitudeMask = forwardRef<HTMLInputElement, MaskProps>(
+    function LatitudeMaskInput(props, ref) {
+        const { onChange, ...other } = props;
+        return (<IMaskInput {...other} inputRef={ref} mask={Number} scale={6} radix="." mapToRadix={[","]} min={-73.990450} max={-28.846875} onAccept={(value: any) => onChange({ target: { name: props.name, value } })} overwrite />)
+    }
+)
+
+
+
 
 interface CreateEditTurbineFormProps {
     initialValues?: Partial<TurbineFormInput>;
@@ -40,34 +63,34 @@ export default function CreateEditTurbineForm({ initialValues, onSubmit, isLoadi
                     <Box>
                         <Box component="label" htmlFor="turbine-latitude" className="modal-field-label">Latitude</Box>
                         <Controller name="latitude" control={control} render={({ field: { ref, ...field } }) => (
-                            <TextField {...field} id="turbine-latitude" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.latitude} helperText={errors.latitude?.message} placeholder="Digite a latitude..." />
+                            <TextField {...field} id="turbine-latitude" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.latitude} helperText={errors.latitude?.message} placeholder="Digite a latitude..." slotProps={{ input: { inputComponent: latitudeMask as any } }} />
                         )} />
                     </Box>
 
                     <Box>
                         <Box component="label" htmlFor="turbine-longitude" className="modal-field-label">Longitude</Box>
                         <Controller name="longitude" control={control} render={({ field: { ref, ...field } }) => (
-                            <TextField {...field} id="turbine-longitude" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.longitude} helperText={errors.longitude?.message} placeholder="Digite a longitude..." />
+                            <TextField {...field} id="turbine-longitude" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.longitude} helperText={errors.longitude?.message} placeholder="Digite a longitude..." slotProps={{ input: { inputComponent: longitudeMask as any } }} />
                         )} />
                     </Box>
                 </Box>
 
                 <Box className="model-selection">
                     <Box className="mb-3 flex shrink-0 items-center gap-3">
-                        <Box component="h3" id="catalog-options-title" className="m-0 text-sm font-semibold uppercase tracking-wider text-[#009B9F]">Modelos registrados</Box>
+                        <Box component="h3" id="catalog-options-title" className="m-0 text-sm font-semibold uppercase tracking-wider text-[#009B9F]">Catálogos registrados</Box>
                         <Box className="h-px flex-1 bg-[#DCE9EB]" />
                     </Box>
 
                     {isCatalogLoading && (
                         <Box role="status" className="flex items-center gap-3 py-4 text-[#68858C]">
                             <CircularProgress size={20} />
-                            Carregando modelos...
+                            Carregando catálogos...
                         </Box>
                     )}
 
                     {isCatalogError && (
                         <Alert severity="error" action={<Button type="button" color="inherit" variant="text" onClick={() => void refetch()}>Tentar novamente</Button>}>
-                            Não foi possível carregar os modelos.
+                            Não foi possível carregar os catálogos.
                         </Alert>
                     )}
 

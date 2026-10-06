@@ -144,7 +144,7 @@ export default function ClientTurbines() {
                                     <TableCell><span className="text-xs font-semibold uppercase text-gray-400">Latitude</span></TableCell>
                                     <TableCell><span className="text-xs font-semibold uppercase text-gray-400">Longitude</span></TableCell>
                                     <TableCell><span className="text-xs font-semibold uppercase text-gray-400">Modelo de turbina</span></TableCell>
-                                    <TableCell align="right"><span className="text-xs font-semibold uppercase text-gray-400">Ações</span></TableCell>
+                                    <TableCell align="right"><span className="text-xs font-semibold uppercase text-gray-400"></span></TableCell>
                                 </TableRow>
                             </TableHead>
                             <TableBody>

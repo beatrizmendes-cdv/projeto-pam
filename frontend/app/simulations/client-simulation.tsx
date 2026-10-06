@@ -13,6 +13,8 @@ import SimulationBox from "../components/SimulationBox";
 import CreateEditSimulationForm from "../forms/simulation/create-edit-simulation-form";
 import { formatSimulationPayload } from "../forms/simulation/format-payload";
 import type { SimulationFormInput, SimulationFormValues } from "../forms/simulation/schema";
+import Details from "../components/Details";
+
 
 type SearchForm = {
     search: string;
@@ -29,6 +31,7 @@ function getErrorMessage(error: unknown): string {
 }
 
 export default function ClientSimulation() {
+    const [viewingSimulation, setViewingSimulation] = useState<ResponseSimulationDto | null>(null);
     const { data: simulation = [], isPending, isError, refetch, createSimulation, updateSimulation, deleteSimulation, isCreating, isUpdating, isDeleting } = useSimulation();
     const { data: turbines = [], isPending: isTurbinesLoading, isError: isTurbinesError, refetch: refetchTurbines } = useTurbine();
 
@@ -149,7 +152,16 @@ export default function ClientSimulation() {
             ) : (
                 <Box className="mt-4 grid gap-4" sx={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 260px), 1fr))" }}>
                     {filteredSimulation.map((item) => (
-                        <SimulationBox key={item.id} name={item.name} total={turbines.filter((turbine) => turbine.simulation_id === item.id).length} date="" onEdit={() => openEditModal(item)} onDelete={() => openDeleteModal(item)} disabled={isBusy} />
+                        <SimulationBox
+                            key={item.id}
+                            name={item.name}
+                            total={turbines.filter((turbine) => turbine.simulation_id === item.id).length}
+                            date=""
+                            onClick={() => setViewingSimulation(item)}
+                            onEdit={() => openEditModal(item)}
+                            onDelete={() => openDeleteModal(item)}
+                            disabled={isBusy}
+                        />
                     ))}
                 </Box>
             )}
@@ -186,6 +198,12 @@ export default function ClientSimulation() {
                     <Button color="error" onClick={handleDelete} disabled={isDeleting}>{isDeleting ? <CircularProgress size={20} color="inherit" /> : "Excluir"}</Button>
                 </DialogActions>
             </Dialog>
+
+            <Details
+                simulation={viewingSimulation}
+                turbines={turbines}
+                onClose={() => setViewingSimulation(null)}
+            />
         </Box>
     );
 }

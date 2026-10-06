@@ -43,15 +43,31 @@ export default function CreateEditTurbineCatalogForm({ initialValues, onSubmit, 
 
                     <Box>
                         <Box component="label" htmlFor="catalog-power" className="modal-field-label">Potência (MW)</Box>
-                        <Controller name="nominalPower" control={control} render={({ field: { ref, ...field } }) => (
-                            <TextField {...field} id="catalog-power" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.nominalPower} helperText={errors.nominalPower?.message} placeholder="15.0" />
-                        )} />
+                        <Controller
+                            name="nominalPower"
+                            control={control}
+                            render={({ field: { ref, ...field } }) => (
+                                <TextField
+                                    {...field}
+                                    id="catalog-power"
+                                    inputRef={ref}
+                                    fullWidth
+                                    disabled={isLoading}
+                                    error={!!errors.nominalPower}
+                                    helperText={errors.nominalPower?.message}
+                                    placeholder="15.0"
+                                    onChange={(e) => {
+                                        const onlyNumbers = e.target.value.replace(/\D/g, "");
+                                        field.onChange(onlyNumbers);
+                                    }}
+                                />
+                            )} />
                     </Box>
 
                     <Box>
                         <Box component="label" htmlFor="catalog-diameter" className="modal-field-label">Diâmetro do rotor (m)</Box>
                         <Controller name="rotorDiameter" control={control} render={({ field: { ref, ...field } }) => (
-                            <TextField {...field} id="catalog-diameter" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.rotorDiameter} helperText={errors.rotorDiameter?.message} placeholder="236" />
+                            <TextField {...field} id="catalog-diameter" inputRef={ref} fullWidth disabled={isLoading} error={!!errors.rotorDiameter} helperText={errors.rotorDiameter?.message} placeholder="236" onChange={(e) => { const onlyNumbers = e.target.value.replace(/\D/g, ""); field.onChange(onlyNumbers) }} />
                         )} />
                     </Box>
                 </Box>
