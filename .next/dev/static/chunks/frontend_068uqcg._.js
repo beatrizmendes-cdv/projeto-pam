@@ -10,7 +10,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$
 ;
 function Card({ label, value, unit }) {
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between min-w-[220px]",
+        className: "bg-white p-5 rounded-xl border border-gray-100 shadow-sm flex flex-col justify-between min-w-220px",
         children: [
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                 className: "text-sm font-medium text-gray-500 mb-2",
@@ -574,19 +574,19 @@ const turbineSchema = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2
         message: "A latitude deve ter no maximo 6 casas decimais."
     }).refine((val)=>!isNaN(Number(val)), {
         message: "Latitude inválida."
-    }).transform((val)=>Number(val)).pipe(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__default$3e$__["default"].number().min(-34, {
-        message: "A latitude do Brasil deve ser maior ou igual a -34."
-    }).max(6, {
-        message: "A latitude do Brasil deve ser menor ou igual a 6"
+    }).transform((val)=>Number(val)).pipe(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__default$3e$__["default"].number().min(-33.752085, {
+        message: "A latitude do Brasil deve ser maior ou igual a -33.752085."
+    }).max(5.271831, {
+        message: "A latitude do Brasil deve ser menor ou igual a 5.271831"
     })),
     longitude: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__default$3e$__["default"].string().trim().min(1, {
         message: "A longitude da turbina é obrigatória."
     }).regex(regexDecimal, {
         message: "A longitude deve ter no maximo 6 casas decimais."
-    }).refine((val)=>!isNaN(Number(val)), "Longitude inválida").transform((val)=>Number(val)).pipe(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__default$3e$__["default"].number().min(-74, {
-        message: "A longitude do Brasil deve ser maior ou igual a -74."
-    }).max(-34, {
-        message: "A longitude no Brasil deve ser menor ou igual a -34"
+    }).refine((val)=>!isNaN(Number(val)), "Longitude inválida").transform((val)=>Number(val)).pipe(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__default$3e$__["default"].number().min(-73.990450, {
+        message: "A longitude do Brasil deve ser maior ou igual a -73.990450."
+    }).max(-28.846875, {
+        message: "A longitude no Brasil deve ser menor ou igual a -28.846875"
     })),
     turbineCatalogId: __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$zod$2f$v4$2f$classic$2f$external$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__$2a$__as__default$3e$__["default"].number({
         message: "O modelo da turbina é obrigatório."
@@ -1235,20 +1235,12 @@ function ClientTurbines() {
                                     lineNumber: 207,
                                     columnNumber: 25
                                 }, this),
-                                turbineToDelete && turbineToDelete.simulation_id !== null && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$mui$2f$material$2f$Alert$2f$Alert$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Alert$3e$__["Alert"], {
-                                    severity: "warning",
-                                    children: "Esta turbina também deixará de fazer parte da simulação à qual está vinculada."
-                                }, void 0, false, {
-                                    fileName: "[project]/frontend/app/turbines/client-turbines.tsx",
-                                    lineNumber: 208,
-                                    columnNumber: 87
-                                }, this),
                                 deleteError && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$mui$2f$material$2f$Alert$2f$Alert$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Alert$3e$__["Alert"], {
                                     severity: "error",
                                     children: deleteError
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/app/turbines/client-turbines.tsx",
-                                    lineNumber: 209,
+                                    lineNumber: 208,
                                     columnNumber: 41
                                 }, this)
                             ]
@@ -1277,7 +1269,7 @@ function ClientTurbines() {
                                 children: "Cancelar"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/app/turbines/client-turbines.tsx",
-                                lineNumber: 213,
+                                lineNumber: 212,
                                 columnNumber: 21
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$next$2f$dist$2f$compiled$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f40$mui$2f$material$2f$Button$2f$Button$2e$mjs__$5b$app$2d$client$5d$__$28$ecmascript$29$__$3c$export__default__as__Button$3e$__["Button"], {
@@ -1289,18 +1281,18 @@ function ClientTurbines() {
                                     color: "inherit"
                                 }, void 0, false, {
                                     fileName: "[project]/frontend/app/turbines/client-turbines.tsx",
-                                    lineNumber: 214,
+                                    lineNumber: 213,
                                     columnNumber: 102
                                 }, this) : "Excluir"
                             }, void 0, false, {
                                 fileName: "[project]/frontend/app/turbines/client-turbines.tsx",
-                                lineNumber: 214,
+                                lineNumber: 213,
                                 columnNumber: 21
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/frontend/app/turbines/client-turbines.tsx",
-                        lineNumber: 212,
+                        lineNumber: 211,
                         columnNumber: 17
                     }, this)
                 ]
@@ -1370,7 +1362,7 @@ __turbopack_context__.s([
     "TurbinesCatalogApiFp",
     ()=>TurbinesCatalogApiFp
 ]);
-var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/clients/projeto-pam/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
 // Some imports not used depending on template conditions
 // @ts-ignore
 var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/clients/projeto-pam/dist/esm/common.js [app-client] (ecmascript)");
@@ -1462,7 +1454,7 @@ const AppApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.appControllerGetHello(options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['AppApi.appControllerGetHello']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         }
     };
@@ -1654,7 +1646,7 @@ const SimulationApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.simulationControllerCreate(createSimulationDto, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['SimulationApi.simulationControllerCreate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1667,7 +1659,7 @@ const SimulationApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.simulationControllerFindAll(options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['SimulationApi.simulationControllerFindAll']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1681,7 +1673,7 @@ const SimulationApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.simulationControllerFindOne(id, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['SimulationApi.simulationControllerFindOne']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1695,7 +1687,7 @@ const SimulationApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.simulationControllerRemove(id, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['SimulationApi.simulationControllerRemove']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1710,7 +1702,7 @@ const SimulationApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.simulationControllerUpdate(id, updateSimulationDto, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['SimulationApi.simulationControllerUpdate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         }
     };
@@ -1972,7 +1964,7 @@ const TurbineApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbinesControllerCreate(createTurbineDto, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbineApi.turbinesControllerCreate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1985,7 +1977,7 @@ const TurbineApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbinesControllerFindAll(options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbineApi.turbinesControllerFindAll']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -1999,7 +1991,7 @@ const TurbineApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbinesControllerFindOne(id, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbineApi.turbinesControllerFindOne']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2013,7 +2005,7 @@ const TurbineApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbinesControllerRemove(id, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbineApi.turbinesControllerRemove']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2028,7 +2020,7 @@ const TurbineApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbinesControllerUpdate(id, updateTurbineDto, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbineApi.turbinesControllerUpdate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         }
     };
@@ -2290,7 +2282,7 @@ const TurbinesCatalogApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbineCatalogControllerCreate(createTurbineCatalogDto, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbinesCatalogApi.turbineCatalogControllerCreate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2303,7 +2295,7 @@ const TurbinesCatalogApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbineCatalogControllerFindAll(options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbinesCatalogApi.turbineCatalogControllerFindAll']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2317,7 +2309,7 @@ const TurbinesCatalogApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbineCatalogControllerFindOne(id, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbinesCatalogApi.turbineCatalogControllerFindOne']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2331,7 +2323,7 @@ const TurbinesCatalogApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbineCatalogControllerRemove(id, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbinesCatalogApi.turbineCatalogControllerRemove']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         },
         /**
@@ -2346,7 +2338,7 @@ const TurbinesCatalogApiFp = function(configuration) {
                 const localVarAxiosArgs = yield localVarAxiosParamCreator.turbineCatalogControllerUpdate(id, updateTurbineCatalogDto, options);
                 const localVarOperationServerIndex = (_a = configuration === null || configuration === void 0 ? void 0 : configuration.serverIndex) !== null && _a !== void 0 ? _a : 0;
                 const localVarOperationServerBasePath = (_c = (_b = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["operationServerMap"]['TurbinesCatalogApi.turbineCatalogControllerUpdate']) === null || _b === void 0 ? void 0 : _b[localVarOperationServerIndex]) === null || _c === void 0 ? void 0 : _c.url;
-                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
+                return (axios, basePath)=>(0, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$common$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["createRequestFunction"])(localVarAxiosArgs, __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"], __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$dist$2f$esm$2f$base$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["BASE_PATH"], configuration)(axios, localVarOperationServerBasePath || basePath);
             });
         }
     };
@@ -2487,7 +2479,7 @@ __turbopack_context__.s([
  * NOTE: This class is auto generated by OpenAPI Generator (https://openapi-generator.tech).
  * https://openapi-generator.tech
  * Do not edit the class manually.
- */ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
+ */ var __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/frontend/clients/projeto-pam/node_modules/axios/lib/axios.js [app-client] (ecmascript)");
 ;
 const BASE_PATH = "http://localhost".replace(/\/+$/, "");
 const COLLECTION_FORMATS = {
@@ -2497,7 +2489,7 @@ const COLLECTION_FORMATS = {
     pipes: "|"
 };
 class BaseAPI {
-    constructor(configuration, basePath = BASE_PATH, axios = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]){
+    constructor(configuration, basePath = BASE_PATH, axios = __TURBOPACK__imported__module__$5b$project$5d2f$frontend$2f$clients$2f$projeto$2d$pam$2f$node_modules$2f$axios$2f$lib$2f$axios$2e$js__$5b$app$2d$client$5d$__$28$ecmascript$29$__["default"]){
         var _a;
         this.basePath = basePath;
         this.axios = axios;

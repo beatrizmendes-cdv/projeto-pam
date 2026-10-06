@@ -9,7 +9,7 @@ export const turbineSchema = z.object({
         .regex(regexDecimal, { message: "A latitude deve ter no maximo 6 casas decimais." })
         .refine((val) => !isNaN(Number(val)), { message: "Latitude inválida." })
         .transform((val) => Number(val))
-        .pipe(z.number().min(-34, { message: "A latitude do Brasil deve ser maior ou igual a -34." }).max(6, { message: "A latitude do Brasil deve ser menor ou igual a 6" })
+        .pipe(z.number().min(-33.752085, { message: "A latitude do Brasil deve ser maior ou igual a -33.752085." }).max(5.271831, { message: "A latitude do Brasil deve ser menor ou igual a 5.271831" })
         ),
     longitude: z
         .string()
@@ -18,7 +18,7 @@ export const turbineSchema = z.object({
         .regex(regexDecimal, { message: "A longitude deve ter no maximo 6 casas decimais." })
         .refine((val) => !isNaN(Number(val)), "Longitude inválida")
         .transform((val) => Number(val))
-        .pipe(z.number().min(-74, { message: "A longitude do Brasil deve ser maior ou igual a -74." }).max(-34, { message: "A longitude no Brasil deve ser menor ou igual a -34" })),
+        .pipe(z.number().min(-73.990450, { message: "A longitude do Brasil deve ser maior ou igual a -73.990450." }).max(-28.846875, { message: "A longitude no Brasil deve ser menor ou igual a -28.846875" })),
 
     turbineCatalogId: z.number({ message: "O modelo da turbina é obrigatório." }).min(1, "Selecione um modelo de catálogo"),
 });
