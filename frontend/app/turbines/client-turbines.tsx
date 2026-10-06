@@ -205,7 +205,7 @@ export default function ClientTurbines() {
                 <DialogContent>
                     <Box className="modal-form-body">
                         <p id="delete-turbine-description" className="text-sm leading-6 text-[#64748B]">Excluir <strong>{turbineToDelete?.name}</strong>? Esta ação não pode ser desfeita.</p>
-                        {turbineToDelete && turbineToDelete.simulation_id !== null && <Alert severity="warning">Esta turbina também deixará de fazer parte da simulação à qual está vinculada.</Alert>}
+                        {turbineToDelete && turbineToDelete.simulation_id !== null && <Alert severity="warning">Esta turbina está vinculada a uma simulação e não pode ser excluída. Desvincule-a na edição da simulação antes de excluir.</Alert>}
                         {deleteError && <Alert severity="error">{deleteError}</Alert>}
                     </Box>
                 </DialogContent>

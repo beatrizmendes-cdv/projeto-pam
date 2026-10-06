@@ -4,7 +4,7 @@ import { UpdateTurbineDto } from './dto/update-turbine.dto.js';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Turbine } from './entities/turbine.entity.js';
 import { ResponseTurbineDto } from './dto/response-turbine.dto.js';
-import { Not, Repository } from "typeorm";
+import { IsNull, Not, Repository } from "typeorm";
 
 @Injectable()
 export class TurbinesService {
@@ -65,7 +65,17 @@ export class TurbinesService {
 
   async remove(id: number): Promise<{ message: string }> {
     const turbine = await this.findOne(id);
-    await this.turbineRepository.remove(turbine);
-    return { message: "Turbina removida com sucesso." }
-  }
+
+    if (turbine.simulation_id !== null) {
+        throw new ConflictException("Esta turbina está vinculada a uma simulação e não pode ser excluída. Desvincule-a na edição da simulação antes de excluir.");
+    }
+
+    const result = await this.turbineRepository.delete({ id, simulation_id: IsNull() });
+
+    if (result.affected !== 1) {
+        throw new ConflictException("Não foi possível excluir a turbina. Ela pode ter sido vinculada a uma simulação ou removida. Atualize a lista.");
+    }
+
+    return { message: "Turbina removida com sucesso." };
+}
 }
